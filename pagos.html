@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pagos | Licorería R.B</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script src="carrito.js" defer></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous"></script>
+  <style>
+    /* Estilos extra para la sección de pagos */
+    .payment-methods {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #232323;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+    }
+    .payment-method {
+      display: flex;
+      align-items: center;
+      padding: 14px 20px;
+      border: 1px solid #444;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      transition: background-color 0.3s ease;
+      cursor: default;
+    }
+    .payment-method:hover {
+      background-color: #c4171a;
+      color: #fff;
+      border-color: #c4171a;
+    }
+    .payment-method i {
+      font-size: 2.5em;
+      margin-right: 18px;
+      width: 50px;
+      text-align: center;
+    }
+    .payment-info h3 {
+      margin: 0 0 6px 0;
+      font-size: 1.3em;
+      color: #f4be3d;
+    }
+    .payment-info p {
+      margin: 0;
+      font-size: 0.95em;
+      color: #ccc;
+    }
+    .note {
+      text-align: center;
+      margin-top: 24px;
+      font-style: italic;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Licorería R.B</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="whisky.html">Whisky</a>
+      <a href="ron.html">Ron</a>
+      <a href="vodka.html">Vodka</a>
+      <a href="cerveza.html">Cervezas</a>
+      <a href="aguardientes.html">Aguardientes</a>
+      <a href="tequilas.html">Tequilas</a>
+      <a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a>
+      <a href="pagos.html">Pagos</a>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <h2>Formas de Pago Profesionales y Seguras</h2>
+
+      <div class="payment-methods">
+
+        <div class="payment-method">
+          <i class="fab fa-cc-paypal" style="color:#003087;"></i>
+          <div class="payment-info">
+            <h3>PayPal</h3>
+            <p>Paga de forma rápida y segura con tu cuenta PayPal o tarjetas vinculadas.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <i class="fab fa-bitcoin" style="color:#f7931a;"></i>
+          <div class="payment-info">
+            <h3>Bitcoin y Criptomonedas</h3>
+            <p>Aceptamos pagos en Bitcoin y otras monedas digitales con la máxima seguridad.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <i class="fas fa-credit-card" style="color:#4a90e2;"></i>
+          <div class="payment-info">
+            <h3>Tarjetas de Crédito y Débito</h3>
+            <p>Próximamente integración con Visa, MasterCard, American Express y más.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <i class="fas fa-mobile-alt" style="color:#00c853;"></i>
+          <div class="payment-info">
+            <h3>Pagos Móviles</h3>
+            <p>Yape, PayPhone, Bizum y plataformas similares disponibles para conveniencia total.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <i class="fas fa-money-bill-wave" style="color:#d32f2f;"></i>
+          <div class="payment-info">
+            <h3>Pago en Efectivo</h3>
+            <p>Pago directo al recibir tu pedido, cómodo y seguro.</p>
+          </div>
+        </div>
+
+        <div class="payment-method">
+          <i class="fas fa-university" style="color:#8e24aa;"></i>
+          <div class="payment-info">
+            <h3>Transferencia Bancaria</h3>
+            <p>También puedes transferir el importe a nuestra cuenta bancaria con instrucciones después de tu pedido.</p>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="note">
+        En cada pedido recibirás las instrucciones específicas para completar el pago con la opción que prefieras.
+      </p>
+
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 Licorería R.B
+  </footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pedidos | Licorería R.B</title>
+  <link rel="stylesheet" href="estilos.css" />
+  <script src="carrito.js" defer></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>Licorería R.B</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="whisky.html">Whisky</a>
+      <a href="ron.html">Ron</a>
+      <a href="vodka.html">Vodka</a>
+      <a href="cerveza.html">Cervezas</a>
+      <a href="aguardientes.html">Aguardientes</a>
+      <a href="tequilas.html">Tequilas</a>
+      <a href="carrito.html"><i class="fas fa-shopping-cart"></i> Carrito</a>
+      <a href="pedidos.html">Pedidos</a>
+    </nav>
+  </header>
+  
+  <main>
+    <section>
+      <h2>Realiza tu pedido</h2>
+      <form id="form-pedido">
+        <input type="text" name="nombre" placeholder="Nombre completo" required />
+        <input type="tel" name="telefono" placeholder="Teléfono de contacto" required />
+        <textarea name="pedido" rows="5" placeholder="Especifica los productos y cantidades" required></textarea>
+        <button type="submit" class="send-btn">Enviar pedido</button>
+      </form>
+      <p style="color:#f4be3d; margin-top: 15px;">
+        Un asesor se contactará contigo para confirmar la compra.
+      </p>
+    </section>
+  </main>
+  
+  <footer>
+    &copy; 2025 Licorería R.B
+  </footer>
+
+  <script>
+    // Evitar envío real, aquí solo muestra alerta
+    document.getElementById('form-pedido').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Gracias por tu pedido. Un asesor se pondrá en contacto contigo pronto.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>

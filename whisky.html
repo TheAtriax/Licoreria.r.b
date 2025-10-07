@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Whiskys | Licorería R.B</title>
+  <script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      background: radial-gradient(circle at top left, #1a1a1a, #111111);
+      color: #f4be3d;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:"";
+      position: fixed;
+      inset:0;
+      background: url('https://images.unsplash.com/photo-1579722826351-7cc9ddd14d1e?auto=format&fit=crop&w=1470&q=80') repeat;
+      background-size: 200px 200px;
+      opacity: 0.05;
+      filter: brightness(0.2);
+      z-index: -1;
+    }
+    header {
+      position: relative;
+      background: url('https://cdn.pixabay.com/photo/2018/06/03/14/32/pistachios-3450670_1280.jpg') no-repeat center;
+      background-size: cover;
+      padding: 38px 20px 68px;
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-shadow: 0 8px 28px #000;
+      box-shadow: inset 0 0 70px #0008;
+      user-select:none;
+      isolation:isolate;
+    }
+    header::after {
+      content:"";
+      position: absolute;
+      inset: 0;
+      background:rgba(0,0,0,0.48);
+      z-index:1;
+    }
+    header h1 {
+      font-size: inherit;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+      letter-spacing: 6px;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 30px #c4171a, 0 0 50px #f4be3d, 0 8px 28px #000;
+    }
+    header img.logo {
+      position: absolute;
+      top: 14px;
+      left: 25px;
+      max-height: 80px;
+      filter: drop-shadow(0 0 6px #f4be3d);
+      z-index: 3;
+      user-select:none;
+    }
+    nav {
+      background: #181816;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 12px 3vw;
+      border-bottom: 3px solid #c4171a;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      box-shadow: 0 4px 10px #000a;
+      user-select:none;
+    }
+    nav a {
+      color: #f4be3d;
+      font-weight: 700;
+      font-size: 1.17em;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      position: relative;
+      transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f4be3d 60%, #c4171a 100%);
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 20px #c4171a88;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      transform: scaleX(1);
+    }
+    nav .carrito {
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    nav a.active {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 30px #c4171a44 inset;
+    }
+    @media (max-width:540px){
+      nav a{font-size:1em;padding:8px 10px;}
+      header {font-size:2em;padding-bottom:33px;}
+      header h1{font-size:1.2em;}
+    }
+    .whisky-titulo {
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin: 50px 0 18px 0;
+      font-family: 'Playfair Display', serif;
+      user-select:none;
+      text-shadow: 0 0 14px #c4171a55, 0 2px 13px #18181ba0;
+    }
+    .info-text {
+      max-width: 700px;
+      margin: 0 auto 33px;
+      color: #ccc;
+      font-size: 1.13em;
+      text-align: center;
+      box-shadow: 0 0 11px #0003;
+      border-radius: 8px;
+    }
+    #busqueda {
+      display: block;
+      margin: 0 auto 24px;
+      padding: 13px 22px;
+      max-width: 380px;
+      width: 94%;
+      font-size: 1.13em;
+      background-color: #181818;
+      border: 1.8px solid #555;
+      border-radius: 9px;
+      color: #f4be3d;
+      outline: none;
+    }
+    .whisky-grid {
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+      gap: 32px;
+      padding: 0 18px;
+      user-select:text;
+    }
+    .whisky-card {
+      background: linear-gradient(122deg, #191919 58%, #7b4e27cc 140%);
+      border-radius: 14px;
+      padding: 25px 17px 19px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 18px #c4171a66;
+      transition: box-shadow 0.28s, transform 0.28s;
+      outline: none;
+    }
+    .whisky-card:hover,
+    .whisky-card:focus {
+      box-shadow: 0 17px 46px #c4171a88;
+      transform: scale(1.07);
+      z-index: 10;
+    }
+    .whisky-card img {
+      width: 75%;
+      height: 130px;
+      object-fit: contain;
+      border-radius: 9px;
+      box-shadow: 0 9px 28px #0007 inset;
+      background: #18181b9a;
+      user-select: none;
+      -webkit-user-drag: none;
+      margin-bottom: 10px;
+    }
+    .whisky-nombre {
+      font-size: 1.16em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin: 12px 0 8px;
+      user-select:text;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 10px #c4171aaa;
+    }
+    .whisky-precio {font-size: 1.07em;font-weight: 800;color: #c4171a;margin-bottom:4px;}
+    .ver-mas {font-size:1em;color:#f4be3d;background:none;border:none;margin-top:10px;cursor:pointer;text-decoration:underline;transition:color 0.2s;}
+    .ver-mas:hover,.ver-mas:focus{color:#c4171a;outline:none;}
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.93);
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+      padding: 13px;
+    }
+    .modal-content {
+      background: #221a1a;
+      border-radius: 22px;
+      max-width: 420px;
+      width: 95vw;
+      padding: 32px 19px 31px;
+      position: relative;
+      box-shadow: 0 10px 50px #c4171abb;
+      text-align: center;
+    }
+    .modal-img {
+      width: 109px;
+      height: 170px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #171717;
+      box-shadow: 0 5px 20px #000d;
+      margin-bottom: 18px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .modal-nombre {
+      font-size: 1.27em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin-bottom: 7px;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-desc {
+      font-size: 1.08em;
+      color: #d7d7d7;
+      margin-bottom: 13px;
+      line-height: 1.52;
+      white-space: pre-line;
+    }
+    .modal-detail {
+      font-size: .99em;
+      margin-bottom: 8px;
+      user-select:text;
+    }
+    .modal-detail span {color:#f4be3d;font-weight:700;}
+    .modal-precio {font-size: 1.13em;color: #c4171a;font-weight: 800;margin: 15px 0 6px;}
+    .modal-btn {
+      background: #f4be3d;
+      color: #c4171a;
+      font-weight: 900;
+      font-size: 1em;
+      padding: 13px 29px;
+      border: none;
+      border-radius: 9px;
+      width: 85%;
+      cursor: pointer;
+      box-shadow: 0 5px 19px #c4171a88;
+      user-select: none;
+      transition: background 0.19s, color 0.19s;
+    }
+    .modal-btn:hover, .modal-btn:focus {
+      background: #c4171a;
+      color: #f9f9f9;
+      outline: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 13px;
+      right: 21px;
+      font-size: 2.5em;
+      color: #f4be3d;
+      cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 2px;
+      line-height: 1;
+      transition: color 0.18s;
+    }
+    .modal-close:hover,.modal-close:focus{color:#c4171a;outline:none;}
+    @media (max-width: 750px) {
+      .whisky-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px;}
+      .whisky-card img {height: 85px;}
+      .modal-content {max-width:95vw;}
+      .modal-img {width:63px;height:98px;}
+    }
+    footer {
+      margin-top: 62px;
+      padding: 30px 15px 17px;
+      background: #18181b;
+      color: #f4be3d;
+      font-size: 1em;
+      letter-spacing: 0.6px;
+      text-align: center;
+      box-shadow: 0 -7px 21px #0009 inset;
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.ibb.co/F4Nq8y7/logo-licoreria.png" alt="Logo Licorería R.B" class="logo" />
+    <h1>Licorería R.B</h1>
+  </header>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="whisky.html" class="active">Whisky</a>
+    <a href="ron.html">Ron</a>
+    <a href="vodka.html">Vinos y Vodka</a>
+    <a href="cerveza.html">Cervezas</a>
+    <a href="aguardientes.html">Aguardientes</a>
+    <a href="tequilas.html">Tequilas</a>
+    <a href="carrito.html" class="carrito"><i class="fas fa-shopping-cart"></i> Carrito</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="whisky-titulo">Whiskys Premium</div>
+  <div class="info-text">Haz clic sobre cualquier whisky para ver detalles, descripción y sumar al carrito.</div>
+  <input type="text" id="busqueda" placeholder="Buscar whisky por nombre..." aria-label="Buscar whisky" />
+  <section class="whisky-grid" id="whiskyGrid"></section>
+  <div class="modal-bg" id="modalWhisky" role="dialog" aria-modal="true" aria-labelledby="modalNombreWhisky">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar" id="modalCerrarWhisky">&times;</button>
+      <img class="modal-img" id="modalImagenWhisky" alt="Imagen de whisky" />
+      <div class="modal-nombre" id="modalNombreWhisky"></div>
+      <div class="modal-desc" id="modalDescripcionWhisky"></div>
+      <div class="modal-detail"><span>Origen:</span> <span id="modalOrigenWhisky"></span></div>
+      <div class="modal-detail"><span>Grados alcohólicos:</span> <span id="modalGradosWhisky"></span></div>
+      <div class="modal-precio" id="modalPrecioWhisky"></div>
+      <button class="modal-btn" id="modalAgregarWhisky">Agregar al carrito</button>
+    </div>
+  </div>
+  <footer tabindex="0">
+    &copy; 2025 Licorería R.B &middot; Comunidad Valdivia &middot; Santa Elena &middot; Ecuador<br />
+    Legal, profesional y confiable &middot; Sitio web creado para sorprender y servirte siempre
+  </footer>
+  <script>
+    const whiskys = [
+      { nombre: "Whisky JohnMorris", precio: 15, grados: "35%", origen: "Escocia / Ecuador (importado)", descripcion: "Whisky blended de sabor suave, ideal para coctelería y consumo social.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-693618.jpg" },
+      { nombre: "Whisky Old times rojo 1L", precio: 14, grados: "35%", origen: "Escocia / Ecuador (importado)", descripcion: "Whisky blended de tonos ahumados y dulces, excelente relación calidad-precio.", img: "https://borbormarket.com/wp-content/uploads/2023/04/OLD-TIMES-RED-1LT.jpg" },
+      { nombre: "Whisky Old times rojo 750ml", precio: 12, grados: "35%", origen: "Escocia / Ecuador (importado)", descripcion: "Un clásico del mercado local, ideal para mezclas y degustaciones casuales.", img: "https://images.cdn.tiendamia.com/rs/tiendamia/image/upload/tm-catalog/gtin/e3d2cf4480a720266305f6f0d6fcb325.jpg" },
+      { nombre: "Whisky Old times negro 750ml", precio: 15, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Versión dark con notas profundas, un perfil intenso y sutil ahumado.", img: "https://borbormarket.com/wp-content/uploads/2023/04/OLDTIMESBLACK-1LT.jpg" },
+      { nombre: "Whisky Old times gold 750ml", precio: 13, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Presentación gold, sabor equilibrado y toque suave de vainilla.", img: "https://www.pedidos24-7.com/wp-content/uploads/2021/01/whisky-old-times-gold-750ml7-1.png" },
+      { nombre: "Whisky Red Willians Red 1L", precio: 13, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Licor ideal para fiestas, mezclas y tragos largos.", img: "https://borbormarket.com/wp-content/uploads/2023/04/RED-WILLIAMS-1LT.jpg" },
+      { nombre: "Whisky Red Willians Red 750ml", precio: 11, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Formato intermedio, buen balance y excelente para grupos grandes.", img: "https://borbormarket.com/wp-content/uploads/2023/04/REDWILLIAMS750.jpg" },
+      { nombre: "Whisky Black Willians 1L", precio: 14, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Edición black, más cuerpo y notas intensas.", img: "https://borbormarket.com/wp-content/uploads/2023/04/black-williams-1lt.jpg" },
+      { nombre: "Whisky Something Special 750ml", precio: 22, grados: "40%", origen: "Escocia", descripcion: "Aroma ligeramente ahumado y afrutado, sabor suave con notas de malta dulce y chocolate amargo.", img: "https://www.tia.com.ec/media/catalog/product/cache/3892c92905b7e34c002a3e6c390564b8/2/4/242962000_1.jpg" },
+      { nombre: "Whisky Johnnie Walker Red 750ml", precio: 25, grados: "40%", origen: "Escocia", descripcion: "El whisky escocés más vendido del mundo. Suave, ligeramente picante y con buena presencia de turba.", img: "https://images.unsplash.com/photo-1514361892635-cebb718daf9c?fit=crop&w=400&q=80" },
+      { nombre: "Whisky Vat 69", precio: 15, grados: "40%", origen: "Escocia", descripcion: "Blended suave y equilibrado, notas de malta, vainilla y toque ahumado.", img: "https://static-01.daraz.com.np/p/2d60543d275505ffb52fd88e10ad1722.jpg" },
+      { nombre: "Whisky Buchanas Deluxe 750ml", precio: 55, grados: "40%", origen: "Escocia", descripcion: "Uno de los whiskies deluxe más vendidos del mundo. Elegante y sofisticado.", img: "https://elbodegon.com.ec/1406-large_default/whisky-buchanans-750ml.jpg" },
+      { nombre: "Whisky Old Parr 750ml", precio: 50, grados: "40%", origen: "Escocia", descripcion: "Blend de whiskies de al menos 12 años, gran tradición y suavidad.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-732609.jpg" },
+      { nombre: "Whisky Willian Lawson", precio: 14, grados: "40%", origen: "Escocia", descripcion: "Blend robusto y de fuerte carácter, notas de frutas maduras y miel.", img: "https://images.unsplash.com/photo-1643236878417-4b24eed65b1e?fit=crop&w=400&q=80" },
+      { nombre: "Whisky Label 5 750ml", precio: 17, grados: "40%", origen: "Escocia", descripcion: "Famoso por su suavidad y relación calidad/precio. Tono dorado y aroma balanceado.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/09/label-5-750ml-lqd.png" },
+      { nombre: "Whisky Grants Triple Wood", precio: 20, grados: "40%", origen: "Escocia", descripcion: "Madurado en tres tipos de madera, ofrece dulzor y complejidad inusual.", img: "https://vinotecaliguria.es/wp-content/uploads/2021/12/Whisky-Grant-12-Years-Triple-Wood.png" },
+      { nombre: "Whisky Cunningham", precio: 10, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Perfil accesible, pensado para mezclas y consumo casual.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/08/cunningham-rojo-1lt-lqd.png" },
+      { nombre: "Whisky Special Queen", precio: 7, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Sabor suave con notas ligeras y dulces, económico pero cumplidor.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-688024.jpg" },
+      { nombre: "Whisky Clan McGregor", precio: 12, grados: "40%", origen: "Escocia", descripcion: "Blend internacional reconocido. Notas de caramelo, manzana, vainilla y toque de roble. Premio mundial.", img: "https://www.luxuriousdrinks.com/media/catalog/product/cache/650443e9ff4ce36e1d191af5226a1f64/w/h/whiskyclanmcgregor_1000ml.jpg" },
+      { nombre: "Whisky Royal Blend", precio: 12, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Buen cuerpo y perfil neutro, ideal para cócteles largos.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-687706.jpg" },
+      { nombre: "Whisky Cartago", precio: 7, grados: "35%", origen: "Ecuador", descripcion: "Clásico nacional asequible y rendidor, para mezclas y fiestas.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/08/cartago-1lt-lqd.png" },
+      { nombre: "Whisky Dixon 8 años", precio: 11, grados: "35%", origen: "Escocia / Ecuador", descripcion: "Añejo 8 años, sabor equilibrado y notas dulces.", img: "https://galaxia.com.ec/1117-large_default/whisky-dixon-8-anos-750ml-botella.jpg" },
+      { nombre: "Whisky Black and White", precio: 20, grados: "40%", origen: "Escocia", descripcion: "Blend internacional clásico, perfil fácil de beber, suave y cremoso.", img: "https://images.unsplash.com/photo-1517315003714-bfbbf86a3dda?fit=crop&w=400&q=80" },
+      { nombre: "Whisky Ballantines", precio: 23, grados: "40%", origen: "Escocia", descripcion: "Uno de los blends más vendidos del mundo, sabor a vainilla y notas de manzana, elegancia y suavidad.", img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80" },
+      { nombre: "Whisky Astilla de roble 1litro", precio: 6.5, grados: "35%", origen: "Ecuador", descripcion: "Original por su infusión de astilla de roble, acento ahumado y sabor distintivo. Nacional.", img: "https://th.bing.com/th/id/OIP.Y8yvByFGU8RQrnjFjEvWbAAAAA?pid=ImgDet&rs=1" },
+      { nombre: "Whisky Astilla de roble 1750ML", precio: 12, grados: "35%", origen: "Ecuador", descripcion: "Tamaño premium familiar, sabores marcados de madera y barrica.", img: "https://th.bing.com/th/id/OIP.Y8yvByFGU8RQrnjFjEvWbAAAAA?pid=ImgDet&rs=1" },
+      { nombre: "Whisky Royal cross", precio: 7, grados: "35%", origen: "Ecuador", descripcion: "Blend ecuatoriano de sabor plano, perfecto para mezclar.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/08/royal-cross-1lt-lqd.png" },
+      { nombre: "Whisky Mr.Allen", precio: 6.5, grados: "35%", origen: "Ecuador", descripcion: "Accesible, creado para consumo masivo y mezclas.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/08/mr-allen-licor-lqd.png" }
+    ];
+
+    const grid = document.getElementById('whiskyGrid');
+    function renderWhiskys(filtered=whiskys){
+      grid.innerHTML = '';
+      filtered.forEach((w,i)=>{
+        grid.innerHTML += `
+          <div class="whisky-card" tabindex="0" onclick="mostrarModal(${i})" onkeypress="if(event.key==='Enter'){mostrarModal(${i})}">
+            <img src="${w.img}" alt="${w.nombre}" loading="lazy" />
+            <div class="whisky-nombre">${w.nombre}</div>
+            <div class="whisky-precio">$${w.precio.toFixed(2)}</div>
+            <button class="ver-mas" onclick="event.stopPropagation();mostrarModal(${i});" aria-label="Ver detalles de ${w.nombre}">Ver detalles</button>
+          </div>
+        `;
+      });
+    }
+    renderWhiskys();
+
+    document.getElementById('busqueda').addEventListener('input',function(){
+      const val = this.value.toLowerCase();
+      const filtrados = whiskys.filter(w => w.nombre.toLowerCase().includes(val));
+      renderWhiskys(filtrados);
+    });
+
+    function mostrarModal(idx){
+      const w = whiskys[idx];
+      const modal = document.getElementById('modalWhisky');
+      document.getElementById('modalImagenWhisky').src = w.img;
+      document.getElementById('modalNombreWhisky').textContent = w.nombre;
+      document.getElementById('modalDescripcionWhisky').textContent = w.descripcion;
+      document.getElementById('modalOrigenWhisky').textContent = w.origen;
+      document.getElementById('modalGradosWhisky').textContent = w.grados;
+      document.getElementById('modalPrecioWhisky').textContent = `$${w.precio.toFixed(2)}`;
+      modal.style.display = "flex";
+      document.getElementById('modalAgregarWhisky').onclick = function(){
+        alert('Agregado al carrito: ' + w.nombre);
+      };
+      document.getElementById('modalCerrarWhisky').focus();
+    }
+    function cerrarModal(){
+      document.getElementById('modalWhisky').style.display = "none";
+    }
+    document.getElementById('modalCerrarWhisky').addEventListener('click',cerrarModal);
+    window.onclick = e => {
+      if(e.target.id === 'modalWhisky') cerrarModal();
+    };
+    window.onkeydown = e => {
+      if(e.key==='Escape') cerrarModal();
+    };
+  </script>
+</body>
+</html>

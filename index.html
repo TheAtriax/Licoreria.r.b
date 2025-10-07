@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Licorería R.B | Inicio - Experiencia Premium</title>
+
+<!-- Optimización de carga: DNS prefetch -->
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//kit.fontawesome.com">
+
+<!-- Carga de Font Awesome para iconos -->
+<script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous" defer></script>
+
+<style>
+/* =====================================
+ESTILOS BASE CON TIMES NEW ROMAN UNIVERSAL
+===================================== 
+*/
+:root {
+  --color-gold: #f4be3d;
+  --color-red: #c4171a;
+  --color-dark: #111111;
+  --color-darker: #0d0d0d;
+  --font-primary: "Times New Roman", Times, serif;
+}
+
+/* FUENTE UNIVERSAL - TIMES NEW ROMAN PARA TODO */
+* {
+  font-family: var(--font-primary) !important;
+}
+
+/* Respeto a preferencias de usuario para animaciones reducidas */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background: radial-gradient(circle at top left, #1a1a1a, var(--color-dark));
+  color: var(--color-gold);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+body::before {
+  content:"";
+  position: fixed;
+  inset:0;
+  background: url('https://images.unsplash.com/photo-1579722826351-7cc9ddd14d1e?auto=format&fit=crop&w=1470&q=80') repeat;
+  background-size: 200px 200px;
+  opacity: 0.05;
+  filter: brightness(0.2);
+  z-index: -1;
+}
+
+/* Skip Navigation para accesibilidad */
+.skip-nav {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--color-gold);
+  color: var(--color-dark);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-weight: bold;
+  z-index: 1000;
+  font-family: var(--font-primary) !important;
+}
+
+.skip-nav:focus {
+  top: 6px;
+}
+
+/* =====================================
+ASISTENTE BOTELLÍN
+===================================== 
+*/
+#botellin-assistant {
+  position: fixed;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold), #DAA520); 
+  box-shadow: 0 0 15px rgba(244, 190, 61, 0.8), 0 0 30px rgba(196, 23, 26, 0.5); 
+  transition: transform 10s linear;
+  z-index: 10;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: pulse-slow 4s ease-in-out infinite;
+  will-change: transform;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+#botellin-assistant:focus {
+  outline-color: var(--color-gold);
+}
+
+#botellin-assistant img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  object-fit: cover;
+  filter: brightness(0.9) contrast(1.1);
+}
+
+#botellin-assistant .fallback-icon {
+  font-size: 2.5em;
+  color: var(--color-dark);
+  display: none;
+  font-family: var(--font-primary) !important;
+}
+
+@keyframes pulse-slow {
+  0%, 100% { 
+    box-shadow: 0 0 15px var(--color-gold), 0 0 30px rgba(196, 23, 26, 0.5); 
+  }
+  50% { 
+    box-shadow: 0 0 25px var(--color-gold), 0 0 45px rgba(196, 23, 26, 0.8); 
+  }
+}
+
+/* =====================================
+CHAT INTERACTIVO DEL BOTELLÍN
+===================================== 
+*/
+#chat-container {
+  position: fixed;
+  bottom: 100px;
+  right: 20px;
+  width: 350px;
+  max-height: 500px;
+  background: var(--color-darker);
+  border: 3px solid var(--color-gold);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px var(--color-red);
+  z-index: 15;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  font-family: var(--font-primary) !important;
+}
+
+#chat-container.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.chat-header {
+  background: linear-gradient(135deg, var(--color-red), var(--color-gold));
+  padding: 15px 20px;
+  color: white;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-primary) !important;
+}
+
+.chat-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s;
+  font-family: var(--font-primary) !important;
+}
+
+.chat-close:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+.chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  padding: 15px;
+  background: var(--color-dark);
+  font-family: var(--font-primary) !important;
+}
+
+.message {
+  margin-bottom: 15px;
+  padding: 12px 15px;
+  border-radius: 15px;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-family: var(--font-primary) !important;
+}
+
+.message.bot {
+  background: linear-gradient(135deg, var(--color-red), #8B0000);
+  color: white;
+  margin-right: auto;
+  border-bottom-left-radius: 5px;
+}
+
+.message.user {
+  background: var(--color-gold);
+  color: var(--color-dark);
+  margin-left: auto;
+  border-bottom-right-radius: 5px;
+}
+
+.chat-input-container {
+  padding: 15px;
+  background: var(--color-darker);
+  border-top: 2px solid var(--color-gold);
+  display: flex;
+  gap: 10px;
+}
+
+#chat-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid var(--color-gold);
+  border-radius: 25px;
+  background: var(--color-dark);
+  color: var(--color-gold);
+  font-family: var(--font-primary) !important;
+  outline: none;
+  font-size: 14px;
+}
+
+#chat-input:focus {
+  box-shadow: 0 0 10px var(--color-gold);
+}
+
+#send-btn {
+  padding: 12px 20px;
+  background: var(--color-gold);
+  color: var(--color-dark);
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+  font-family: var(--font-primary) !important;
+}
+
+#send-btn:hover {
+  background: var(--color-red);
+  color: white;
+  transform: scale(1.05);
+}
+
+/* =====================================
+ENCABEZADO - TAMAÑO EXACTO DEL EJEMPLO
+===================================== 
+*/
+header {
+  position: relative;
+  background: url('https://cdn.pixabay.com/photo/2016/06/22/18/39/cigar-1473699_1280.jpg') no-repeat center;
+  background-size: cover;
+  /* EXACTAMENTE IGUAL AL EJEMPLO */
+  padding: 38px 20px 68px;
+  text-align: center;
+  color: var(--color-gold);
+  font-size: 2.8em;
+  font-weight: 900;
+  letter-spacing: 4px;
+  text-shadow: 0 8px 28px #000;
+  box-shadow: inset 0 0 70px #0008;
+  user-select: none;
+  isolation: isolate;
+}
+
+header::after {
+  content:"";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.48);
+  z-index: 1;
+}
+
+header h1 {
+  /* EXACTAMENTE COMO EL EJEMPLO DE RON.HTML */
+  font-size: inherit;
+  font-family: var(--font-primary) !important;
+  font-weight: bold;
+  letter-spacing: 6px;
+  margin: 0;
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 30px var(--color-red), 0 0 50px var(--color-gold), 0 8px 28px #000;
+}
+
+header img.logo {
+  position: absolute;
+  top: 14px;
+  left: 25px;
+  max-height: 80px;
+  filter: drop-shadow(0 0 6px var(--color-gold));
+  z-index: 3;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* =====================================
+CARRITO FIJO - TIMES NEW ROMAN
+===================================== 
+*/
+.fixed-cart-badge {
+  position: fixed;
+  top: 25px;
+  right: 35px;
+  z-index: 20;
+  background: var(--color-red);
+  color: #fff;
+  padding: 14px 25px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.15em;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 7px 30px var(--color-red), 0 0 15px var(--color-gold);
+  transition: all 0.3s cubic-bezier(.17, .67, .83, .67);
+  cursor: pointer;
+  border: 3px solid var(--color-gold);
+  animation: pulse 2.5s infinite;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-family: var(--font-primary) !important;
+}
+
+.fixed-cart-badge:focus {
+  outline-color: var(--color-gold);
+}
+
+.fixed-cart-badge:hover {
+  background: var(--color-gold);
+  color: var(--color-red);
+  box-shadow: 0 10px 40px var(--color-gold);
+  transform: scale(1.07);
+}
+
+.cart-count {
+  background: var(--color-gold);
+  color: var(--color-dark);
+  border-radius: 50%;
+  padding: 3px 8px;
+  font-size: 0.8em;
+  font-weight: 900;
+  min-width: 20px;
+  text-align: center;
+  font-family: var(--font-primary) !important;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(244, 190, 61, 0.4); }
+  70% { box-shadow: 0 0 0 12px rgba(244, 190, 61, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(244, 190, 61, 0); }
+}
+
+/* =====================================
+NAVEGACIÓN - EXACTAMENTE COMO EL EJEMPLO
+===================================== 
+*/
+nav {
+  background: #181816;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding: 12px 3vw;
+  border-bottom: 3px solid var(--color-red);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  font-family: var(--font-primary) !important;
+}
+
+nav a {
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 1.17em;
+  text-decoration: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  position: relative;
+  transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-family: var(--font-primary) !important;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: 4px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold) 60%, var(--color-red) 100%);
+  border-radius: 3px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+nav a:hover,
+nav a:focus {
+  background: var(--color-red);
+  color: #fff;
+  box-shadow: 0 0 20px rgba(196, 23, 26, 0.533);
+  outline-color: var(--color-gold);
+}
+
+nav a:hover::after,
+nav a:focus::after {
+  transform: scaleX(1);
+}
+
+nav .carrito {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-primary) !important;
+}
+
+nav a.active {
+  background: var(--color-red);
+  color: #fff;
+  box-shadow: 0 0 30px rgba(196, 23, 26, 0.267) inset;
+}
+
+/* =====================================
+SECCIÓN HERO - TIMES NEW ROMAN
+===================================== 
+*/
+.hero {
+  background: linear-gradient(120deg, var(--color-darker) 60%, var(--color-red) 120%);
+  padding: 100px 22px 80px;
+  text-align: center;
+  user-select: text;
+  border-bottom: 5px solid var(--color-red);
+}
+
+.hero-title {
+  font-family: var(--font-primary) !important;
+  font-size: 4em;
+  font-weight: 900;
+  margin-bottom: 24px;
+  text-shadow: 0 0 40px var(--color-red), 0 10px 30px #000;
+  letter-spacing: 3px;
+  color: #fff;
+}
+
+.hero-subtitle {
+  font-size: 1.5em;
+  max-width: 750px;
+  margin: 0 auto 40px;
+  line-height: 1.5;
+  color: #e0e0e0;
+  text-shadow: 0 3px 15px #000;
+  font-family: var(--font-primary) !important;
+}
+
+.cta-btn {
+  display: inline-block;
+  padding: 18px 45px;
+  background: var(--color-gold);
+  color: var(--color-red);
+  border: none;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 1.25em;
+  margin: 15px 12px;
+  box-shadow: 0 8px 30px var(--color-red);
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s cubic-bezier(.49,.03,.53,1);
+  user-select: none;
+  text-transform: uppercase;
+  text-decoration: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  font-family: var(--font-primary) !important;
+}
+
+.cta-btn:hover,
+.cta-btn:focus {
+  background: var(--color-red);
+  color: #fff;
+  transform: scale(1.07) translateY(-5px);
+  box-shadow: 0 15px 40px var(--color-gold);
+  outline-color: var(--color-gold);
+}
+
+.contact-icons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  user-select: none;
+}
+
+.contact-icons a {
+  font-size: 3em;
+  transition: transform 0.3s ease;
+  text-shadow: 0 5px 15px #000;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+  border-radius: 8px;
+}
+
+.contact-icons a:focus {
+  outline-color: var(--color-gold);
+}
+
+.contact-icons a:hover,
+.contact-icons a:focus {
+  transform: scale(1.25) rotate(5deg);
+  color: var(--color-red);
+}
+
+/* =====================================
+SECCIONES Y TÍTULOS - TIMES NEW ROMAN
+===================================== 
+*/
+section {
+  margin: 80px auto 70px;
+  max-width: 1200px;
+  padding: 0 30px;
+}
+
+.section-title {
+  font-family: var(--font-primary) !important;
+  font-size: 2.4em;
+  color: var(--color-gold);
+  text-align: center;
+  margin: 50px 0 18px 0;
+  font-weight: bold;
+  letter-spacing: 2px;
+  user-select: none;
+  text-shadow: 0 0 14px rgba(196, 23, 26, 0.333), 0 2px 13px rgba(24, 24, 27, 0.627);
+}
+
+/* =====================================
+ACERCA DE Y HIGHLIGHTS
+===================================== 
+*/
+.about-content {
+  color: #dcdcdc;
+  font-size: 1.15em;
+  line-height: 1.8;
+  text-align: center;
+  max-width: 850px;
+  margin: 0 auto 20px;
+  font-family: var(--font-primary) !important;
+}
+
+.highlights-section {
+  margin: 80px auto 70px;
+  max-width: 1200px;
+  padding: 0 30px;
+}
+
+.highlights {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.highlight {
+  background: var(--color-darker);
+  border-radius: 16px;
+  padding: 25px;
+  text-align: center;
+  box-shadow: 0 7px 20px #000;
+  cursor: pointer;
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+  border: 1px solid #333;
+  user-select: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.highlight:hover,
+.highlight:focus {
+  box-shadow: 0 18px 50px #000f, 0 0 20px var(--color-gold);
+  transform: translateY(-7px);
+  outline-color: var(--color-gold);
+}
+
+.highlight i {
+  font-size: 2.8em;
+  margin-bottom: 15px;
+  color: var(--color-red);
+  text-shadow: 0 0 10px var(--color-gold);
+}
+
+.highlight h3 {
+  font-family: var(--font-primary) !important;
+  font-size: 1.4em;
+  margin: 0 0 10px;
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+.highlight p {
+  color: #aaa;
+  font-size: 0.95em;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+CATÁLOGO
+===================================== 
+*/
+.catalog-preview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 35px;
+  justify-content: center;
+}
+
+.preview-card {
+  background: var(--color-darker);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 4px 18px #000a;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  text-align: center;
+  border: 1px solid #333;
+  text-decoration: none;
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+.preview-card:hover,
+.preview-card:focus {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 18px 45px #000f, 0 0 15px var(--color-red);
+  outline-color: var(--color-gold);
+}
+
+.preview-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 3px solid var(--color-red);
+  loading: lazy;
+}
+
+.preview-card h4 {
+  font-family: var(--font-primary) !important;
+  margin: 20px 0 10px;
+  color: var(--color-gold);
+  font-size: 1.5em;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.preview-card p {
+  color: #ccc;
+  padding: 0 20px;
+  font-size: 1em;
+  margin-bottom: 20px;
+  font-family: var(--font-primary) !important;
+}
+
+.preview-card .cta-btn {
+  display: block;
+  width: calc(100% - 40px);
+  margin: 0 auto 20px;
+  padding: 12px 0;
+  font-size: 1em;
+  box-shadow: none;
+  background: var(--color-red);
+  color: #fff;
+}
+
+.preview-card .cta-btn:hover {
+  background: var(--color-gold);
+  color: var(--color-dark);
+  transform: none;
+}
+
+/* =====================================
+TESTIMONIOS
+===================================== 
+*/
+.testimonial-boxes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+}
+
+.testimonial {
+  background: linear-gradient(145deg, #181818 0%, #0d0d0d 100%);
+  border-radius: 18px;
+  padding: 30px 25px;
+  max-width: 380px;
+  font-style: italic;
+  box-shadow: 0 8px 25px #0009;
+  position: relative;
+  color: #e0e0e0;
+  border-left: 5px solid var(--color-red);
+  transition: transform 0.3s ease;
+  font-family: var(--font-primary) !important;
+}
+
+.testimonial:hover {
+  transform: translateY(-5px);
+}
+
+.testimonial::before {
+  content: """;
+  font-size: 5em;
+  color: var(--color-red);
+  opacity: 0.7;
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  z-index: 0;
+  font-family: var(--font-primary) !important;
+}
+
+.testimonial p {
+  position: relative;
+  z-index: 1;
+  font-size: 1.1em;
+  font-family: var(--font-primary) !important;
+}
+
+.testimonial span.person {
+  display: block;
+  margin-top: 20px;
+  font-weight: 900;
+  color: var(--color-gold);
+  font-size: 1.1em;
+  text-align: right;
+  font-style: normal;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+UBICACIÓN
+===================================== 
+*/
+.location-title {
+  font-family: var(--font-primary) !important;
+  font-size: 2.5em;
+  color: var(--color-gold);
+  text-align: center;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  user-select: none;
+  text-shadow: 0 0 10px var(--color-gold);
+  font-weight: bold;
+}
+
+.location-map {
+  display: flex;
+  justify-content: center;
+  margin-top: 25px;
+}
+
+.location-map iframe {
+  border: 5px solid var(--color-red);
+  border-radius: 25px;
+  width: 100vw;
+  max-width: 750px;
+  height: 300px;
+  box-shadow: 0 10px 40px #000c;
+}
+
+/* =====================================
+FOOTER
+===================================== 
+*/
+footer {
+  margin-top: 62px;
+  padding: 30px 15px 17px;
+  background: #18181b;
+  color: var(--color-gold);
+  font-size: 1em;
+  letter-spacing: 0.6px;
+  text-align: center;
+  box-shadow: 0 -7px 21px #0009 inset;
+  user-select: none;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+MEDIA QUERIES EXACTAS DEL EJEMPLO
+===================================== 
+*/
+@media (max-width: 750px) {
+  .catalog-preview { 
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); 
+    gap: 15px;
+  }
+  .preview-card img {height: 85px;}
+}
+
+@media (max-width: 900px) {
+  .hero-title {font-size: 3em; letter-spacing: 2px;}
+  .hero-subtitle {font-size: 1.2em; max-width: 90%;}
+  .section-title {font-size: 2.2em;}
+
+  /* Header EXACTAMENTE como el ejemplo en móvil */
+  header {font-size: 2em; padding-bottom: 33px;}
+  header h1 {font-size: 1.2em;}
+  header img.logo {max-height: 65px; left: 15px;}
+
+  .fixed-cart-badge {
+    top: 15px;
+    right: 15px;
+    padding: 10px 14px;
+    font-size: 0.9em;
+  }
+
+  .fixed-cart-badge span {
+    display: none;
+  }
+
+  .contact-icons a {font-size: 2.5em;}
+  .location-map iframe {height: 250px;}
+  section {margin: 40px auto;}
+
+  /* Chat responsive */
+  #chat-container {
+    width: 95vw;
+    right: 2.5vw;
+    bottom: 90px;
+  }
+
+  /* Botellín móvil */
+  #botellin-assistant {
+    width: 60px;
+    height: 60px;
+  }
+
+  #botellin-assistant img {
+    width: 55px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 540px) {
+  nav {gap: 8px; padding: 12px 10px;}
+  nav a {font-size: 1em; padding: 8px 10px;}
+  header {padding: 20px 10px 30px;}
+  .hero-title {font-size: 2.3em;}
+  .hero-subtitle {font-size: 1em;}
+  .cta-btn {padding: 15px 30px; font-size: 1.1em; margin: 10px 5px;}
+  .fixed-cart-badge {right: 5px;}
+
+  #chat-container {
+    width: 100vw;
+    right: 0;
+    bottom: 0;
+    border-radius: 20px 20px 0 0;
+    max-height: 60vh;
+  }
+}
+
+/* =====================================
+UTILIDADES
+===================================== 
+*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+</style>
+</head>
+<body>
+
+<!-- Skip Navigation -->
+<a href="#main-content" class="skip-nav">Ir al contenido principal</a>
+
+<!-- CARRITO FIJO -->
+<a href="carrito.html" class="fixed-cart-badge" aria-label="Ver carrito de compras">
+  <i class="fas fa-shopping-cart" aria-hidden="true"></i>
+  <span>Mi Carrito</span>
+  <div class="cart-count" id="cart-count">0</div>
+</a>
+
+<header>
+  <img src="https://i.ibb.co/F4Nq8y7/logo-licoreria.png" alt="Logo Licorería R.B" class="logo" />
+  <h1>Licorería R.B</h1>
+</header>
+
+<nav aria-label="Menú principal de navegación" role="navigation">
+  <a href="index.html" class="active">Inicio</a>
+  <a href="whisky.html">Whisky</a>
+  <a href="ron.html">Ron</a>
+  <a href="vodka.html">Vinos y Vodka</a>
+  <a href="cerveza.html">Cervezas</a>
+  <a href="aguardientes.html">Aguardientes</a>
+  <a href="tequilas.html">Tequilas</a>
+  <a href="carrito.html" class="carrito"><i class="fas fa-shopping-cart"></i> Carrito</a>
+  <a href="contacto.html">Contacto</a>
+</nav>
+
+<!-- BOTELLÍN ASISTENTE -->
+<div id="botellin-assistant" role="button" tabindex="0" aria-label="Chat con asistente Botellín">
+    <img src="https://placehold.co/70x70/FFD700/0A0A1F?text=🍾" alt="Botellín Asistente" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+    <div class="fallback-icon">🍾</div>
+</div>
+
+<!-- CHAT DEL BOTELLÍN -->
+<div id="chat-container" role="dialog" aria-label="Chat con Botellín Asistente">
+  <div class="chat-header">
+    <span>🍾 Chat con Botellín</span>
+    <button class="chat-close" aria-label="Cerrar chat">&times;</button>
+  </div>
+  <div class="chat-messages" id="chat-messages">
+    <div class="message bot">
+      ¡Hola! 👋 Soy Botellín, tu asistente virtual. ¿En qué puedo ayudarte hoy? Pregúntame sobre nuestros productos, precios, horarios o cualquier cosa sobre Licorería R.B.
+    </div>
+  </div>
+  <div class="chat-input-container">
+    <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." maxlength="500">
+    <button id="send-btn">Enviar</button>
+  </div>
+</div>
+
+<main id="main-content">
+  <section class="hero" aria-label="Sección destacada inicio">
+    <h2 class="hero-title">¡LA CULTURA DEL LICOR PREMIUM!</h2>
+    <p class="hero-subtitle">
+      Bienvenido a <strong>Licorería R.B</strong>, la excelencia en bebidas y cócteles desde la comunidad de Valdivia, Santa Elena, Ecuador.<br>
+      Más de 5 años ofreciendo lo mejor en licores nacionales e internacionales, servicio de primera y compromiso total con la calidad y legalidad.
+    </p>
+    <a href="catalogo.html" class="cta-btn">Explorar Catálogo Premium</a>
+    <a href="comprar.html" class="cta-btn">Pide tu Entrega Express</a>
+
+    <div class="contact-icons" role="region" aria-label="Enlaces de contacto">
+      <a href="https://wa.me/593999999999" target="_blank" rel="noopener" aria-label="WhatsApp" style="color:#25d366;">
+        <i class="fab fa-whatsapp" aria-hidden="true"></i>
+      </a>
+      <a href="https://facebook.com" target="_blank" rel="noopener" aria-label="Facebook" style="color:#1877f3;">
+        <i class="fab fa-facebook" aria-hidden="true"></i>
+      </a>
+      <a href="https://instagram.com" target="_blank" rel="noopener" aria-label="Instagram" style="color:#c13584;">
+        <i class="fab fa-instagram" aria-hidden="true"></i>
+      </a>
+      <a href="mailto:info@licoreriarb.com" aria-label="Email" style="color:var(--color-gold);">
+        <i class="fas fa-envelope" aria-hidden="true"></i>
+      </a>
+    </div>
+  </section>
+
+  <section class="about" aria-labelledby="aboutTitle">
+    <h2 class="section-title" id="aboutTitle">Nuestra Promesa Premium</h2>
+    <p class="about-content">
+      <strong>Licorería R.B</strong> es más que una tienda, es un socio de tu celebración. Con más de 5 años en Valdivia, Santa Elena, Ecuador, somos un negocio totalmente legal y reconocido por nuestra <strong>selección curada</strong> y servicio impecable.
+    </p>
+    <p class="about-content">
+      Nuestro compromiso de calidad y servicio:<br>
+      – <strong>Asesoría experta</strong> y atención personalizada.<br>
+      – Productos <strong>100% originales</strong>, con garantía de origen.<br>
+      – <strong>Entrega inmediata</strong> y discreta en la comunidad y zonas aledañas.<br>
+      – <strong>Eventos exclusivos</strong> y promociones especiales para clientes fieles.<br>
+      – La mayor variedad en licores importados y artesanales.
+    </p>
+  </section>
+
+  <!-- SECCIÓN HIGHLIGHTS CON LAYOUT VERTICAL -->
+  <section class="highlights-section" aria-label="Razones para elegir R.B">
+    <h2 class="section-title">¿Por Qué Elegir R.B?</h2>
+    <div class="highlights">
+      <article class="highlight" tabindex="0">
+        <i class="fas fa-medal" aria-hidden="true"></i>
+        <h3>Certificación Legal</h3>
+        <p>Operamos con todas las licencias y despachamos productos que cumplen estrictamente con normas sanitarias.</p>
+      </article>
+
+      <article class="highlight" tabindex="0">
+        <i class="fas fa-glass-cheers" aria-hidden="true"></i>
+        <h3>Elixir Global</h3>
+        <p>Desde el single malt escocés hasta el pisco peruano, te ofrecemos una colección de licores del mundo.</p>
+      </article>
+
+      <article class="highlight" tabindex="0">
+        <i class="fas fa-bolt" aria-hidden="true"></i>
+        <h3>Entrega Inmediata</h3>
+        <p>Nuestro servicio Express te garantiza que tu pedido llega a tiempo, fresco y listo para la ocasión.</p>
+      </article>
+
+      <article class="highlight" tabindex="0">
+        <i class="fas fa-handshake" aria-hidden="true"></i>
+        <h3>Confianza Garantizada</h3>
+        <p>Cada botella tiene el sello de garantía R.B. Si no estás 100% satisfecho, lo resolvemos inmediatamente.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="catalog" aria-label="Catálogo destacado">
+    <h2 class="section-title">Nuestros Destilados Más Exclusivos (Aguardientes)</h2>
+    <div class="catalog-preview">
+
+      <a href="aguardientes.html#antioqueño" class="preview-card" aria-label="Aguardiente Antioqueño">
+        <img src="https://images.unsplash.com/photo-1569529465841-dfecdab7503b?auto=format&fit=crop&w=400&q=80" alt="Aguardiente Antioqueño" loading="lazy" />
+        <h4>Aguardiente Antioqueño</h4>
+        <p>El sabor tradicional que evoca la alegría y el folclor colombiano. Un clásico indispensable.</p>
+        <span class="cta-btn" aria-hidden="true">Ver detalles</span>
+      </a>
+
+      <a href="aguardientes.html#cristal-1960" class="preview-card" aria-label="Aguardiente Cristal 1960">
+        <img src="https://images.unsplash.com/photo-1582794543139-8ac9cb0f7b11?auto=format&fit=crop&w=400&q=80" alt="Aguardiente Cristal Clásico 1960" loading="lazy" />
+        <h4>Cristal Añejo (1960)</h4>
+        <p>Un tesoro añejo. Sabor suave y puro, un homenaje a la tradición con un toque de dulzura.</p>
+        <span class="cta-btn" aria-hidden="true">Ver detalles</span>
+      </a>
+
+      <a href="aguardientes.html#cristal-compacto" class="preview-card" aria-label="Licor Cristal Compacto">
+        <img src="https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?auto=format&fit=crop&w=400&q=80" alt="Licor Cristal Mini" loading="lazy" />
+        <h4>Licor Cristal Compacto</h4>
+        <p>La esencia del sabor concentrada en un formato perfecto para el coleccionista o un brindis íntimo.</p>
+        <span class="cta-btn" aria-hidden="true">Ver detalles</span>
+      </a>
+
+      <a href="whisky.html" class="preview-card" aria-label="Whiskys Premium">
+        <img src="https://images.unsplash.com/photo-1514361892635-cebb718daf9c?fit=crop&w=400&q=80" alt="Whisky premium" loading="lazy" />
+        <h4>Whiskys de Colección</h4>
+        <p>Selecciones añejas, Single Malts raros y las mejores marcas para el verdadero conocedor.</p>
+        <span class="cta-btn" aria-hidden="true">Explora el sabor</span>
+      </a>
+    </div>
+  </section>
+
+  <section class="testimonials" aria-label="Testimonios de clientes">
+    <h2 class="section-title">Voces de Nuestra Comunidad</h2>
+    <div class="testimonial-boxes">
+      <blockquote class="testimonial" tabindex="0">
+        <p>
+          "Excelente atención, los mejores licores y siempre cumplen con su palabra. ¡Totalmente recomendados y legales!"
+        </p>
+        <span class="person">– Carlos V., Valdivia</span>
+      </blockquote>
+
+      <blockquote class="testimonial" tabindex="0">
+        <p>
+          "Me sorprendió la variedad internacional y los precios justos. Me asesoraron con calidez y recibí todo rapidísimo."
+        </p>
+        <span class="person">– Paola G., Santa Elena</span>
+      </blockquote>
+
+      <blockquote class="testimonial" tabindex="0">
+        <p>
+          "Ya compré varias veces para mis eventos y nunca fallan. Seguridad, confianza y calidad en cada compra. Un servicio de 5 estrellas."
+        </p>
+        <span class="person">– Ricardo M., Manglaralto</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="location" aria-label="Ubicación">
+    <h2 class="location-title">Encuéntranos en Valdivia</h2>
+    <div style="color:#dcdcdc; text-align:center; font-size:1.1em; font-family: var(--font-primary);">
+      Comunidad de Valdivia, Ruta Spondylus, Santa Elena, Ecuador <br />
+      <strong style="color:var(--color-gold); font-size:1.15em;">¡Te esperamos en nuestra tienda física o pide tu entrega!</strong>
+    </div>
+    <div class="location-map">
+      <iframe 
+        src="https://www.google.com/maps?q=Valdivia,+Santa+Elena,+Ecuador&z=15&output=embed" 
+        allowfullscreen 
+        loading="lazy"
+        sandbox="allow-scripts allow-same-origin"
+        title="Mapa de Licorería R.B">
+      </iframe>
+    </div>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 Licorería R.B &middot; Comunidad Valdivia &middot; Santa Elena &middot; Ecuador<br />
+  Legal, profesional y confiable &middot; Sitio web creado para sorprender y servirte siempre
+</footer>
+
+<script>
+(function() {
+  'use strict';
+
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Variables del chat
+    const botellin = document.getElementById('botellin-assistant');
+    const chatContainer = document.getElementById('chat-container');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('send-btn');
+    const chatClose = document.querySelector('.chat-close');
+    let isChatOpen = false;
+
+    // Respuestas del bot
+    const botResponses = {
+      'hola': '¡Hola! 👋 ¡Qué gusto verte! ¿En qué puedo ayudarte?',
+      'productos': 'Tenemos whiskys, rones, vodkas, cervezas, aguardientes, tequilas y vinos. ¿Te interesa alguna categoría?',
+      'precios': 'Nuestros precios son competitivos. Ron Castillo $8, Havana Club 3 años $15. ¿Qué producto buscas?',
+      'horarios': 'Estamos abiertos todos los días. ¿Necesitas entrega? Nuestro servicio express está disponible.',
+      'entrega': 'Entrega inmediata en Valdivia y zonas cercanas. Servicio rápido y discreto. ¿A dónde llevamos tu pedido?',
+      'ubicacion': 'Comunidad de Valdivia, Ruta Spondylus, Santa Elena, Ecuador. ¡Te esperamos!',
+      'legal': 'Somos 100% legal con todas las licencias. Cumplimos normas sanitarias estrictamente.',
+      'aguardientes': 'Nuestros aguardientes: Antioqueño, Cristal Añejo 1960 y Cristal Compacto. ¡Sabor excepcional!',
+      'ron': 'Rones premium: Abuelo, Havana Club, Flor de Caña y opciones locales como Castillo.',
+      'whisky': 'Whiskys incluye single malts escoceses y las mejores marcas internacionales.',
+      'gracias': '¡De nada! 😊 Estoy aquí para ayudarte. ¡Excelente día!',
+      'default': 'Interesante 🤔 Contacta WhatsApp para respuesta detallada. ¡Te atenderán genial!'
+    };
+
+    function getBotResponse(userMessage) {
+      const message = userMessage.toLowerCase();
+
+      for (let key in botResponses) {
+        if (message.includes(key)) {
+          return botResponses[key];
+        }
+      }
+
+      if (message.includes('cuánto') || message.includes('precio') || message.includes('cuesta')) {
+        return botResponses.precios;
+      }
+
+      if (message.includes('dónde') || message.includes('donde') || message.includes('ubicación')) {
+        return botResponses.ubicacion;
+      }
+
+      if (message.includes('hora') || message.includes('abierto') || message.includes('cerrado')) {
+        return botResponses.horarios;
+      }
+
+      if (message.includes('recomend') || message.includes('suger') || message.includes('mejor')) {
+        return '¡Excelente! 🌟 Para celebraciones: Flor de Caña 5 años. Para mezclas: Havana Club 3 años. Premium: Cristal 1960. ¿Para qué ocasión?';
+      }
+
+      return botResponses.default;
+    }
+
+    function addMessage(message, isBot = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isBot ? 'bot' : 'user'}`;
+      messageDiv.textContent = message;
+
+      chatMessages.appendChild(messageDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function sendMessage() {
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      addMessage(message);
+      chatInput.value = '';
+
+      setTimeout(() => {
+        const response = getBotResponse(message);
+        addMessage(response, true);
+      }, 1000);
+    }
+
+    // Event listeners
+    botellin.addEventListener('click', () => {
+      isChatOpen = !isChatOpen;
+      chatContainer.classList.toggle('show', isChatOpen);
+      if (isChatOpen) chatInput.focus();
+    });
+
+    botellin.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        isChatOpen = !isChatOpen;
+        chatContainer.classList.toggle('show', isChatOpen);
+        if (isChatOpen) chatInput.focus();
+      }
+    });
+
+    chatClose.addEventListener('click', () => {
+      isChatOpen = false;
+      chatContainer.classList.remove('show');
+    });
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Carrito
+    function updateCartCount() {
+      const cartCountElement = document.getElementById('cart-count');
+      if (cartCountElement) {
+        cartCountElement.textContent = '0';
+      }
+    }
+
+    // Movimiento del botellín
+    const minSize = 80;
+    let targetX = window.innerWidth * 0.8;
+    let targetY = window.innerHeight * 0.3;
+    let currentX = targetX;
+    let currentY = targetY;
+
+    function calculateNewTarget() {
+      const margin = 20;
+      const maxX = Math.max(margin, window.innerWidth - minSize - margin);
+      const maxY = Math.max(margin, window.innerHeight - minSize - margin);
+
+      targetX = Math.random() * (maxX - margin) + margin;
+      targetY = Math.random() * (maxY - margin) + margin;
+    }
+
+    function moveBotellin() {
+      const dx = (targetX - currentX) * 0.02;
+      const dy = (targetY - currentY) * 0.02;
+
+      currentX += dx;
+      currentY += dy;
+
+      botellin.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+      if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
+        setTimeout(calculateNewTarget, 2000);
+      }
+
+      requestAnimationFrame(moveBotellin);
+    }
+
+    // Inicialización
+    updateCartCount();
+    botellin.style.transform = `translate(${currentX}px, ${currentY}px)`;
+    moveBotellin();
+
+    window.addEventListener('resize', calculateNewTarget);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rones | Licorería R.B</title>
+  <script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      background: radial-gradient(circle at top left, #1a1a1a, #111111);
+      color: #f4be3d;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:"";
+      position: fixed;
+      inset:0;
+      background: url('https://images.unsplash.com/photo-1579722826351-7cc9ddd14d1e?auto=format&fit=crop&w=1470&q=80') repeat;
+      background-size: 200px 200px;
+      opacity: 0.05;
+      filter: brightness(0.2);
+      z-index: -1;
+    }
+    header {
+      position: relative;
+      background: url('https://cdn.pixabay.com/photo/2016/06/22/18/39/cigar-1473699_1280.jpg') no-repeat center;
+      background-size: cover;
+      padding: 38px 20px 68px;
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-shadow: 0 8px 28px #000;
+      box-shadow: inset 0 0 70px #0008;
+      user-select: none;
+      isolation: isolate;
+    }
+    header::after {
+      content:"";
+      position: absolute;
+      inset: 0;
+      background:rgba(0,0,0,0.48);
+      z-index:1;
+    }
+    header h1 {
+      font-size: inherit;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+      letter-spacing: 6px;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 30px #c4171a, 0 0 50px #f4be3d, 0 8px 28px #000;
+    }
+    header img.logo {
+      position: absolute;
+      top: 14px;
+      left: 25px;
+      max-height: 80px;
+      filter: drop-shadow(0 0 6px #f4be3d);
+      z-index: 3;
+      user-select: none;
+    }
+    nav {
+      background: #181816;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 12px 3vw;
+      border-bottom: 3px solid #c4171a;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    nav a {
+      color: #f4be3d;
+      font-weight: 700;
+      font-size: 1.17em;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      position: relative;
+      transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f4be3d 60%, #c4171a 100%);
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 20px #c4171a88;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      transform: scaleX(1);
+    }
+    nav .carrito {
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    nav a.active {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 30px #c4171a44 inset;
+    }
+    @media (max-width:540px){
+      nav a{font-size:1em;padding:8px 10px;}
+      header {font-size:2em;padding-bottom:33px;}
+      header h1{font-size:1.2em;}
+    }
+    .ron-titulo {
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin: 50px 0 18px 0;
+      font-family: 'Playfair Display', serif;
+      user-select:none;
+      text-shadow: 0 0 14px #c4171a55, 0 2px 13px #18181ba0;
+    }
+    .info-text {
+      max-width: 700px;
+      margin: 0 auto 33px;
+      color: #ccc;
+      font-size: 1.13em;
+      text-align: center;
+      box-shadow: 0 0 11px #0003;
+      border-radius: 8px;
+    }
+    #busqueda {
+      display: block;
+      margin: 0 auto 24px;
+      padding: 13px 22px;
+      max-width: 380px;
+      width: 94%;
+      font-size: 1.13em;
+      background-color: #181818;
+      border: 1.8px solid #555;
+      border-radius: 9px;
+      color: #f4be3d;
+      outline: none;
+    }
+    .ron-grid {
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+      gap: 32px;
+      padding: 0 18px;
+      user-select:text;
+    }
+    .ron-card {
+      background: linear-gradient(122deg, #191919 58%, #7b4e27cc 140%);
+      border-radius: 14px;
+      padding: 25px 17px 19px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 18px #c4171a66;
+      transition: box-shadow 0.28s, transform 0.28s;
+      outline: none;
+    }
+    .ron-card:hover,
+    .ron-card:focus {
+      box-shadow: 0 17px 46px #c4171a88;
+      transform: scale(1.07);
+      z-index: 10;
+    }
+    .ron-card img {
+      width: 75%;
+      height: 130px;
+      object-fit: contain;
+      border-radius: 9px;
+      box-shadow: 0 9px 28px #0007 inset;
+      background: #18181b9a;
+      user-select: none;
+      -webkit-user-drag: none;
+      margin-bottom: 10px;
+    }
+    .ron-nombre {
+      font-size: 1.16em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin: 12px 0 8px;
+      user-select:text;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 10px #c4171aaa;
+    }
+    .ron-precio {font-size: 1.07em;font-weight: 800;color: #c4171a;margin-bottom:4px;}
+    .ver-mas {font-size:1em;color:#f4be3d;background:none;border:none;margin-top:10px;cursor:pointer;text-decoration:underline;transition:color 0.2s;}
+    .ver-mas:hover,.ver-mas:focus{color:#c4171a;outline:none;}
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.93);
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+      padding: 13px;
+    }
+    .modal-content {
+      background: #221a1a;
+      border-radius: 22px;
+      max-width: 420px;
+      width: 95vw;
+      padding: 32px 19px 31px;
+      position: relative;
+      box-shadow: 0 10px 50px #c4171abb;
+      text-align: center;
+    }
+    .modal-img {
+      width: 109px;
+      height: 170px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #171717;
+      box-shadow: 0 5px 20px #000d;
+      margin-bottom: 18px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .modal-nombre {
+      font-size: 1.27em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin-bottom: 7px;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-desc {
+      font-size: 1.08em;
+      color: #d7d7d7;
+      margin-bottom: 13px;
+      line-height: 1.52;
+      white-space: pre-line;
+    }
+    .modal-detail {
+      font-size: .99em;
+      margin-bottom: 8px;
+      user-select:text;
+    }
+    .modal-detail span {color:#f4be3d;font-weight:700;}
+    .modal-precio {font-size: 1.13em;color: #c4171a;font-weight: 800;margin: 15px 0 6px;}
+    .modal-btn {
+      background: #f4be3d;
+      color: #c4171a;
+      font-weight: 900;
+      font-size: 1em;
+      padding: 13px 29px;
+      border: none;
+      border-radius: 9px;
+      width: 85%;
+      cursor: pointer;
+      box-shadow: 0 5px 19px #c4171a88;
+      user-select: none;
+      transition: background 0.19s, color 0.19s;
+    }
+    .modal-btn:hover, .modal-btn:focus {
+      background: #c4171a;
+      color: #f9f9f9;
+      outline: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 13px;
+      right: 21px;
+      font-size: 2.5em;
+      color: #f4be3d;
+      cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 2px;
+      line-height: 1;
+      transition: color 0.18s;
+    }
+    .modal-close:hover,.modal-close:focus{color:#c4171a;outline:none;}
+    @media (max-width: 750px) {
+      .ron-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px;}
+      .ron-card img {height: 85px;}
+      .modal-content {max-width:95vw;}
+      .modal-img {width:63px;height:98px;}
+    }
+    footer {
+      margin-top: 62px;
+      padding: 30px 15px 17px;
+      background: #18181b;
+      color: #f4be3d;
+      font-size: 1em;
+      letter-spacing: 0.6px;
+      text-align: center;
+      box-shadow: 0 -7px 21px #0009 inset;
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.ibb.co/F4Nq8y7/logo-licoreria.png" alt="Logo Licorería R.B" class="logo" />
+    <h1>Licorería R.B</h1>
+  </header>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="whisky.html">Whisky</a>
+    <a href="ron.html" class="active">Ron</a>
+    <a href="vodka.html">Vinos y Vodka</a>
+    <a href="cerveza.html">Cervezas</a>
+    <a href="aguardientes.html">Aguardientes</a>
+    <a href="tequilas.html">Tequilas</a>
+    <a href="carrito.html" class="carrito"><i class="fas fa-shopping-cart"></i> Carrito</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="ron-titulo">Rones destacados</div>
+  <div class="info-text">Haz clic sobre cualquier ron para ver detalles, descripción y sumar al carrito.</div>
+  <input type="text" id="busqueda" placeholder="Buscar ron por nombre..." aria-label="Buscar ron" />
+  <section class="ron-grid" id="ronGrid"></section>
+  <div class="modal-bg" id="modalRon" role="dialog" aria-modal="true" aria-labelledby="modalNombreRon">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar" id="modalCerrarRon">&times;</button>
+      <img class="modal-img" id="modalImagenRon" alt="Imagen del ron" />
+      <div class="modal-nombre" id="modalNombreRon"></div>
+      <div class="modal-desc" id="modalDescripcionRon"></div>
+      <div class="modal-detail"><span>Origen:</span> <span id="modalOrigenRon"></span></div>
+      <div class="modal-detail"><span>Grados alcohólicos:</span> <span id="modalGradosRon"></span></div>
+      <div class="modal-precio" id="modalPrecioRon"></div>
+      <button class="modal-btn" id="modalAgregarRon">Agregar al carrito</button>
+    </div>
+  </div>
+  <footer tabindex="0">
+    &copy; 2025 Licorería R.B &middot; Comunidad Valdivia &middot; Santa Elena &middot; Ecuador<br />
+    Legal, profesional y confiable &middot; Sitio web creado para sorprender y servirte siempre
+  </footer>
+  <script>
+    const rones = [
+      { nombre: "Ron Abuelo", precio: 17, grados: "37.5%", origen: "Panamá", descripcion: "Ron añejo panameño, sabor suave, perfecto para tomar solo o en cocktails.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/ron-abuelo-anejo.png" },
+      { nombre: "Ron Havana Club 3 Años", precio: 15, grados: "40%", origen: "Cuba", descripcion: "Tropical y tradicional, imprescindible para mojitos y daiquiris.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/havana-club-3-750ml.png" },
+      { nombre: "Ron Castillo Añejo", precio: 8, grados: "35%", origen: "Ecuador", descripcion: "Ron añejo local, ideal para fiestas y mezclas.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/castillo-anejo-1lt.png" },
+      { nombre: "Ron Cubay Carta Blanca", precio: 13, grados: "38%", origen: "Cuba", descripcion: "Carta blanca clásico, notas frescas y licoreras, excelente para tragos tropicales.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2023/08/ron-cubay-carta-blanca-700ml-1.png" },
+      { nombre: "Ron Santa Fe", precio: 7, grados: "35%", origen: "Ecuador", descripcion: "Económico y bueno para cócteles y bebidas largas.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2022/01/ron-santa-fe-1l.png" },
+      { nombre: "Ron Malibú", precio: 19, grados: "21%", origen: "Barbados", descripcion: "Ron de coco, refrescante para mixología y cocteles caribeños.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2022/04/ron-malibu-700ml.png" },
+      { nombre: "Ron Flor de Caña 5 años", precio: 20, grados: "35%", origen: "Nicaragua", descripcion: "Fino y premiado, madera y sutiles notas dulces. Toma solo o con hielo.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2022/01/flor-de-cana-5anos-700ml.png" },
+      { nombre: "Ron Castillo Silver", precio: 8, grados: "35%", origen: "Ecuador", descripcion: "Ron silver nacional, perfil fresco para bebidas frías y tragos con fruta.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/castillo-silver-1lt.png" }
+    ];
+    const grid = document.getElementById('ronGrid');
+    function renderRones(filtered=rones){
+      grid.innerHTML = '';
+      filtered.forEach((r,i)=>{
+        grid.innerHTML += `
+          <div class="ron-card" tabindex="0" onclick="mostrarModal(${i})" onkeypress="if(event.key==='Enter'){mostrarModal(${i})}">
+            <img src="${r.img}" alt="${r.nombre}" loading="lazy" />
+            <div class="ron-nombre">${r.nombre}</div>
+            <div class="ron-precio">$${r.precio.toFixed(2)}</div>
+            <button class="ver-mas" onclick="event.stopPropagation();mostrarModal(${i});" aria-label="Ver detalles de ${r.nombre}">Ver detalles</button>
+          </div>
+        `;
+      });
+    }
+    renderRones();
+
+    document.getElementById('busqueda').addEventListener('input',function(){
+      const val = this.value.toLowerCase();
+      const filtrados = rones.filter(r => r.nombre.toLowerCase().includes(val));
+      renderRones(filtrados);
+    });
+
+    function mostrarModal(idx){
+      const r = rones[idx];
+      const modal = document.getElementById('modalRon');
+      document.getElementById('modalImagenRon').src = r.img;
+      document.getElementById('modalNombreRon').textContent = r.nombre;
+      document.getElementById('modalDescripcionRon').textContent = r.descripcion;
+      document.getElementById('modalOrigenRon').textContent = r.origen;
+      document.getElementById('modalGradosRon').textContent = r.grados;
+      document.getElementById('modalPrecioRon').textContent = `$${r.precio.toFixed(2)}`;
+      modal.style.display = "flex";
+      document.getElementById('modalAgregarRon').onclick = function(){
+        alert('Agregado al carrito: ' + r.nombre);
+      };
+      document.getElementById('modalCerrarRon').focus();
+    }
+    function cerrarModal(){
+      document.getElementById('modalRon').style.display = "none";
+    }
+    document.getElementById('modalCerrarRon').addEventListener('click',cerrarModal);
+    window.onclick = e => {
+      if(e.target.id === 'modalRon') cerrarModal();
+    };
+    window.onkeydown = e => {
+      if(e.key==='Escape') cerrarModal();
+    };
+  </script>
+</body>
+</html>

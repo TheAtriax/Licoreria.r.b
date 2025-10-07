@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Vinos y Vodkas | Licorería R.B</title>
+  <script src="https://kit.fontawesome.com/1df557c19c.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Times New Roman", Times, serif;
+      background: radial-gradient(circle at top left, #1a1a1a, #111111);
+      color: #f4be3d;
+      overflow-x: hidden;
+    }
+    body::before {
+      content:"";
+      position: fixed;
+      inset:0;
+      background: url('https://cdn.pixabay.com/photo/2018/02/05/10/40/wine-3131868_1280.jpg') repeat;
+      background-size: 200px 200px;
+      opacity: 0.05;
+      filter: brightness(0.2);
+      z-index: -1;
+    }
+    header {
+      position: relative;
+      background: url('https://cdn.pixabay.com/photo/2015/09/25/23/40/wines-958451_1280.jpg') no-repeat center;
+      background-size: cover;
+      padding: 38px 20px 68px;
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.8em;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-shadow: 0 8px 28px #000;
+      box-shadow: inset 0 0 70px #0008;
+      user-select:none;
+      isolation:isolate;
+    }
+    header::after {
+      content:"";
+      position: absolute;
+      inset: 0;
+      background:rgba(0,0,0,0.48);
+      z-index:1;
+    }
+    header h1 {
+      font-size: inherit;
+      font-family: "Times New Roman", Times, serif;
+      font-weight: bold;
+      letter-spacing: 6px;
+      margin: 0;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 0 30px #c4171a, 0 0 50px #f4be3d, 0 8px 28px #000;
+    }
+    header img.logo {
+      position: absolute;
+      top: 14px;
+      left: 25px;
+      max-height: 80px;
+      filter: drop-shadow(0 0 6px #f4be3d);
+      z-index: 3;
+      user-select: none;
+    }
+    nav {
+      background: #181816;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 12px 3vw;
+      border-bottom: 3px solid #c4171a;
+      position: sticky;
+      top: 0;
+      z-index: 30;
+    }
+    nav a {
+      color: #f4be3d;
+      font-weight: 700;
+      font-size: 1.17em;
+      text-decoration: none;
+      padding: 10px 18px;
+      border-radius: 8px;
+      position: relative;
+      transition: color 0.4s, background-color 0.4s, box-shadow 0.4s;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      bottom: 4px;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #f4be3d 60%, #c4171a 100%);
+      border-radius: 3px;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+      pointer-events: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 20px #c4171a88;
+      outline: none;
+    }
+    nav a:hover::after,
+    nav a:focus::after {
+      transform: scaleX(1);
+    }
+    nav .carrito {
+      display:flex;
+      align-items:center;
+      gap:7px;
+    }
+    nav a.active {
+      background: #c4171a;
+      color: #fff;
+      box-shadow: 0 0 30px #c4171a44 inset;
+    }
+    @media (max-width:540px){
+      nav a{font-size:1em;padding:8px 10px;}
+      header {font-size:2em;padding-bottom:33px;}
+      header h1{font-size:1.2em;}
+    }
+    .vinos-titulo {
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.4em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin: 50px 0 18px 0;
+      font-family: 'Playfair Display', serif;
+      user-select:none;
+      text-shadow: 0 0 14px #c4171a55, 0 2px 13px #18181ba0;
+    }
+    .vodkas-titulo {
+      text-align: center;
+      color: #f4be3d;
+      font-size: 2.2em;
+      font-weight: bold;
+      letter-spacing: 2px;
+      margin: 40px 0 15px 0;
+      font-family: 'Playfair Display', serif;
+      user-select:none;
+      text-shadow: 0 0 13px #c4171a44, 0 2px 10px #18181ba0;
+    }
+    .info-text {
+      max-width: 700px;
+      margin: 0 auto 33px;
+      color: #ccc;
+      font-size: 1.13em;
+      text-align: center;
+      box-shadow: 0 0 11px #0003;
+      border-radius: 8px;
+    }
+    #busquedaVinos, #busquedaVodkas {
+      display: block;
+      margin: 0 auto 24px;
+      padding: 13px 22px;
+      max-width: 380px;
+      width: 94%;
+      font-size: 1.13em;
+      background-color: #181818;
+      border: 1.8px solid #555;
+      border-radius: 9px;
+      color: #f4be3d;
+      outline: none;
+    }
+    .vinos-grid, .vodkas-grid {
+      max-width: 1100px;
+      margin: 0 auto 50px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill,minmax(230px,1fr));
+      gap: 32px;
+      padding: 0 18px;
+      user-select:text;
+    }
+    .vino-card, .vodka-card {
+      background: linear-gradient(122deg, #191919 58%, #845552cc 140%);
+      border-radius: 14px;
+      padding: 25px 17px 19px;
+      text-align: center;
+      cursor: pointer;
+      box-shadow: 0 0 18px #c4171a66;
+      transition: box-shadow 0.28s, transform 0.28s;
+      outline: none;
+    }
+    .vino-card:hover, .vodka-card:hover,
+    .vino-card:focus, .vodka-card:focus {
+      box-shadow: 0 17px 46px #c4171a88;
+      transform: scale(1.07);
+      z-index: 10;
+    }
+    .vino-card img, .vodka-card img {
+      width: 75%;
+      height: 130px;
+      object-fit: contain;
+      border-radius: 9px;
+      box-shadow: 0 9px 28px #0007 inset;
+      background: #18181b9a;
+      user-select: none;
+      -webkit-user-drag: none;
+      margin-bottom: 10px;
+    }
+    .vino-nombre, .vodka-nombre {
+      font-size: 1.16em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin: 12px 0 8px;
+      user-select:text;
+      font-family: 'Playfair Display', serif;
+      text-shadow: 0 0 10px #c4171aaa;
+    }
+    .vino-precio, .vodka-precio {font-size: 1.07em;font-weight: 800;color: #c4171a;margin-bottom:4px;}
+    .ver-mas {font-size:1em;color:#f4be3d;background:none;border:none;margin-top:10px;cursor:pointer;text-decoration:underline;transition:color 0.2s;}
+    .ver-mas:hover,.ver-mas:focus{color:#c4171a;outline:none;}
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.93);
+      align-items: center;
+      justify-content: center;
+      z-index: 20000;
+      padding: 13px;
+    }
+    .modal-content {
+      background: #221a1a;
+      border-radius: 22px;
+      max-width: 420px;
+      width: 95vw;
+      padding: 32px 19px 31px;
+      position: relative;
+      box-shadow: 0 10px 50px #c4171abb;
+      text-align: center;
+    }
+    .modal-img {
+      width: 109px;
+      height: 170px;
+      object-fit: contain;
+      border-radius: 10px;
+      background: #171717;
+      box-shadow: 0 5px 20px #000d;
+      margin-bottom: 18px;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .modal-nombre {
+      font-size: 1.27em;
+      font-weight: 700;
+      color: #f4be3d;
+      margin-bottom: 7px;
+      font-family: 'Playfair Display', serif;
+    }
+    .modal-desc {
+      font-size: 1.08em;
+      color: #d7d7d7;
+      margin-bottom: 13px;
+      line-height: 1.52;
+      white-space: pre-line;
+    }
+    .modal-detail {
+      font-size: .99em;
+      margin-bottom: 8px;
+      user-select:text;
+    }
+    .modal-detail span {color:#f4be3d;font-weight:700;}
+    .modal-precio {font-size: 1.13em;color: #c4171a;font-weight: 800;margin: 15px 0 6px;}
+    .modal-btn {
+      background: #f4be3d;
+      color: #c4171a;
+      font-weight: 900;
+      font-size: 1em;
+      padding: 13px 29px;
+      border: none;
+      border-radius: 9px;
+      width: 85%;
+      cursor: pointer;
+      box-shadow: 0 5px 19px #c4171a88;
+      user-select: none;
+      transition: background 0.19s, color 0.19s;
+    }
+    .modal-btn:hover, .modal-btn:focus {
+      background: #c4171a;
+      color: #f9f9f9;
+      outline: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 13px;
+      right: 21px;
+      font-size: 2.5em;
+      color: #f4be3d;
+      cursor: pointer;
+      user-select: none;
+      background: none;
+      border: none;
+      padding: 2px;
+      line-height: 1;
+      transition: color 0.18s;
+    }
+    .modal-close:hover,.modal-close:focus{color:#c4171a;outline:none;}
+    @media (max-width: 750px) {
+      .vinos-grid, .vodkas-grid { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 15px;}
+      .vino-card img, .vodka-card img {height: 85px;}
+      .modal-content {max-width:95vw;}
+      .modal-img {width:63px;height:98px;}
+    }
+    footer {
+      margin-top: 62px;
+      padding: 30px 15px 17px;
+      background: #18181b;
+      color: #f4be3d;
+      font-size: 1em;
+      letter-spacing: 0.6px;
+      text-align: center;
+      box-shadow: 0 -7px 21px #0009 inset;
+      user-select:none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <img src="https://i.ibb.co/F4Nq8y7/logo-licoreria.png" alt="Logo Licorería R.B" class="logo" />
+    <h1>Licorería R.B</h1>
+  </header>
+  <nav>
+    <a href="index.html">Inicio</a>
+    <a href="whisky.html">Whisky</a>
+    <a href="ron.html">Ron</a>
+    <a href="vodka.html" class="active">Vinos y Vodka</a>
+    <a href="cerveza.html">Cervezas</a>
+    <a href="aguardientes.html">Aguardientes</a>
+    <a href="tequilas.html">Tequilas</a>
+    <a href="carrito.html" class="carrito"><i class="fas fa-shopping-cart"></i> Carrito</a>
+    <a href="contacto.html">Contacto</a>
+  </nav>
+  <div class="vinos-titulo">Vinos destacados</div>
+  <div class="info-text">Haz clic en cualquier vino para ver detalles y sumar al carrito.</div>
+  <input type="text" id="busquedaVinos" placeholder="Buscar vino por nombre..." aria-label="Buscar vino" />
+  <section class="vinos-grid" id="vinosGrid"></section>
+
+  <div class="vodkas-titulo">Vodkas destacados</div>
+  <div class="info-text">Haz clic en cualquier vodka para ver detalles y sumar al carrito.</div>
+  <input type="text" id="busquedaVodkas" placeholder="Buscar vodka por nombre..." aria-label="Buscar vodka" />
+  <section class="vodkas-grid" id="vodkasGrid"></section>
+
+  <div class="modal-bg" id="modalVinoVodka" role="dialog" aria-modal="true" aria-labelledby="modalNombreVV">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar" id="modalCerrarVV">&times;</button>
+      <img class="modal-img" id="modalImagenVV" alt="Imagen" />
+      <div class="modal-nombre" id="modalNombreVV"></div>
+      <div class="modal-desc" id="modalDescripcionVV"></div>
+      <div class="modal-detail"><span>Origen:</span> <span id="modalOrigenVV"></span></div>
+      <div class="modal-detail"><span>Grados alcohólicos:</span> <span id="modalGradosVV"></span></div>
+      <div class="modal-precio" id="modalPrecioVV"></div>
+      <button class="modal-btn" id="modalAgregarVV">Agregar al carrito</button>
+    </div>
+  </div>
+  <footer tabindex="0">
+    &copy; 2025 Licorería R.B &middot; Comunidad Valdivia &middot; Santa Elena &middot; Ecuador<br />
+    Legal, profesional y confiable &middot; Sitio web creado para sorprender y servirte siempre
+  </footer>
+<script>
+  const vinos = [
+    { nombre: "Vino Clos Merlot Tinto", precio: 6, grados: "12%", origen: "Chile", descripcion: "Ideal para acompañar carnes y pastas. Económico y buen sabor.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-665240.jpg" },
+    { nombre: "Vino Clos Cartón", precio: 5, grados: "10%", origen: "Chile", descripcion: "Presentación económica, ideal para reuniones y cocteles sangría.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-688533.jpg" },
+    { nombre: "Vino Reservado Concha y Toro", precio: 11, grados: "13.5%", origen: "Chile", descripcion: "Merlot de cuerpo medio, aromas frutales y final suave. Excelente calidad.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-732631.jpg" },
+    { nombre: "Vino Portón Dulce", precio: 9, grados: "12%", origen: "Perú", descripcion: "Dulce y frutal, perfecto para postres y aperitivos.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-687871.jpg" },
+    { nombre: "Vino Reservado Clos D'or Cabernet", precio: 10, grados: "13%", origen: "Chile", descripcion: "Cabernet elegante, con notas a frutos rojos y taninos suaves.", img: "https://www.supermaxi.com/maestro/imagenes/i/imagen-689466.jpg" }
+  ];
+
+  const vodkas = [
+    { nombre: "Vodka Skyy", precio: 17, grados: "40%", origen: "EE.UU.", descripcion: "Vodka premium, filtrado cuatro veces para extra suavidad.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2022/11/vodka-skyy-700ml.png" },
+    { nombre: "Vodka Smirnoff", precio: 18, grados: "37.5%", origen: "Rusia / EE.UU.", descripcion: "Fresco y versátil. Ideal para mezclas y tragos directos.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/vodka-smirnoff-750ml-rosado.png" },
+    { nombre: "Vodka Absolute", precio: 20, grados: "40%", origen: "Suecia", descripcion: "Ampliamente reconocido en coctelería, sabor neutro y limpio.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2022/04/vodka-absolut-700ml.png" },
+    { nombre: "Vodka Zhumir", precio: 7, grados: "35%", origen: "Ecuador", descripcion: "Vodka nacional, buena opción para cócteles económicos.", img: "https://licoresadomicilioecuador.com/wp-content/uploads/2021/09/zhumir-vodka-750ml.png" }
+  ];
+
+  // Vinos
+  const vinosGrid = document.getElementById('vinosGrid');
+  function renderVinos(filtered=vinos){
+    vinosGrid.innerHTML = '';
+    filtered.forEach((v,i)=>{
+      vinosGrid.innerHTML += `
+        <div class="vino-card" tabindex="0" onclick="mostrarModalVV('vino',${i})" onkeypress="if(event.key==='Enter'){mostrarModalVV('vino',${i})}">
+          <img src="${v.img}" alt="${v.nombre}" loading="lazy" />
+          <div class="vino-nombre">${v.nombre}</div>
+          <div class="vino-precio">$${v.precio.toFixed(2)}</div>
+          <button class="ver-mas" onclick="event.stopPropagation();mostrarModalVV('vino',${i});" aria-label="Ver detalles de ${v.nombre}">Ver detalles</button>
+        </div>
+      `;
+    });
+  }
+  renderVinos();
+
+  document.getElementById('busquedaVinos').addEventListener('input',function(){
+    const val = this.value.toLowerCase();
+    const filtrados = vinos.filter(v => v.nombre.toLowerCase().includes(val));
+    renderVinos(filtrados);
+  });
+
+  // Vodkas
+  const vodkasGrid = document.getElementById('vodkasGrid');
+  function renderVodkas(filtered=vodkas){
+    vodkasGrid.innerHTML = '';
+    filtered.forEach((v,i)=>{
+      vodkasGrid.innerHTML += `
+        <div class="vodka-card" tabindex="0" onclick="mostrarModalVV('vodka',${i})" onkeypress="if(event.key==='Enter'){mostrarModalVV('vodka',${i})}">
+          <img src="${v.img}" alt="${v.nombre}" loading="lazy" />
+          <div class="vodka-nombre">${v.nombre}</div>
+          <div class="vodka-precio">$${v.precio.toFixed(2)}</div>
+          <button class="ver-mas" onclick="event.stopPropagation();mostrarModalVV('vodka',${i});" aria-label="Ver detalles de ${v.nombre}">Ver detalles</button>
+        </div>
+      `;
+    });
+  }
+  renderVodkas();
+
+  document.getElementById('busquedaVodkas').addEventListener('input',function(){
+    const val = this.value.toLowerCase();
+    const filtrados = vodkas.filter(v => v.nombre.toLowerCase().includes(val));
+    renderVodkas(filtrados);
+  });
+
+  // Modal para vinos y vodkas
+  function mostrarModalVV(tipo, idx){
+    const item = (tipo==='vino'? vinos[idx] : vodkas[idx]);
+    const modal = document.getElementById('modalVinoVodka');
+    document.getElementById('modalImagenVV').src = item.img;
+    document.getElementById('modalNombreVV').textContent = item.nombre;
+    document.getElementById('modalDescripcionVV').textContent = item.descripcion;
+    document.getElementById('modalOrigenVV').textContent = item.origen;
+    document.getElementById('modalGradosVV').textContent = item.grados;
+    document.getElementById('modalPrecioVV').textContent = `$${item.precio.toFixed(2)}`;
+    modal.style.display = "flex";
+    document.getElementById('modalAgregarVV').onclick = function(){
+      alert('Agregado al carrito: ' + item.nombre);
+    };
+    document.getElementById('modalCerrarVV').focus();
+  }
+  function cerrarModalVV(){
+    document.getElementById('modalVinoVodka').style.display = "none";
+  }
+  document.getElementById('modalCerrarVV').addEventListener('click',cerrarModalVV);
+  window.onclick = e => {
+    if(e.target.id === 'modalVinoVodka') cerrarModalVV();
+  };
+  window.onkeydown = e => {
+    if(e.key==='Escape') cerrarModalVV();
+  };
+</script>
+</body>
+</html>
