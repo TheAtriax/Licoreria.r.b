@@ -20,6 +20,7 @@ ESTILOS BASE CON TIMES NEW ROMAN UNIVERSAL
 :root {
   --color-gold: #f4be3d;
   --color-red: #c4171a;
+  --color-wine: #8B0000;
   --color-dark: #111111;
   --color-darker: #0d0d0d;
   --font-primary: "Times New Roman", Times, serif;
@@ -79,7 +80,7 @@ body::before {
 }
 
 /* =====================================
-ASISTENTE BOTELLÍN MEJORADO
+ASISTENTE BOTELLÍN MEJORADO CON COLORES VINO/ROJO
 ===================================== 
 */
 #botellin-assistant {
@@ -87,8 +88,8 @@ ASISTENTE BOTELLÍN MEJORADO
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-gold), #DAA520); 
-  box-shadow: 0 0 15px rgba(244, 190, 61, 0.8), 0 0 30px rgba(196, 23, 26, 0.5); 
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red)); 
+  box-shadow: 0 0 15px rgba(139, 0, 0, 0.8), 0 0 30px rgba(196, 23, 26, 0.5); 
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   z-index: 1000;
   cursor: pointer;
@@ -109,7 +110,7 @@ ASISTENTE BOTELLÍN MEJORADO
 
 #botellin-assistant:hover {
   transform: scale(1.1);
-  box-shadow: 0 0 25px var(--color-gold), 0 0 45px rgba(196, 23, 26, 0.8);
+  box-shadow: 0 0 25px var(--color-wine), 0 0 45px rgba(196, 23, 26, 0.8);
 }
 
 #botellin-assistant img {
@@ -122,17 +123,17 @@ ASISTENTE BOTELLÍN MEJORADO
 
 #botellin-assistant .fallback-icon {
   font-size: 2.5em;
-  color: var(--color-dark);
-  display: block;
+  color: var(--color-gold);
+  display: none;
   font-family: var(--font-primary) !important;
 }
 
 @keyframes pulse-slow {
   0%, 100% { 
-    box-shadow: 0 0 15px var(--color-gold), 0 0 30px rgba(196, 23, 26, 0.5); 
+    box-shadow: 0 0 15px rgba(139, 0, 0, 0.8), 0 0 30px rgba(196, 23, 26, 0.5); 
   }
   50% { 
-    box-shadow: 0 0 25px var(--color-gold), 0 0 45px rgba(196, 23, 26, 0.8); 
+    box-shadow: 0 0 25px var(--color-wine), 0 0 45px rgba(196, 23, 26, 0.8); 
   }
 }
 
@@ -156,6 +157,10 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
   animation: slideInUp 0.3s ease-out;
 }
 
+#chat-container.show {
+  display: block;
+}
+
 @keyframes slideInUp {
   from {
     transform: translateY(100px);
@@ -168,8 +173,8 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
 }
 
 .chat-header {
-  background: linear-gradient(135deg, var(--color-gold), #DAA520);
-  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   padding: 15px 20px;
   font-weight: bold;
   display: flex;
@@ -184,7 +189,7 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
   border: none;
   font-size: 24px;
   cursor: pointer;
-  color: var(--color-dark);
+  color: var(--color-gold);
   padding: 0;
   width: 30px;
   height: 30px;
@@ -197,7 +202,7 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
 }
 
 .chat-close:hover {
-  background: rgba(0,0,0,0.2);
+  background: rgba(244,190,61,0.2);
   transform: scale(1.1);
 }
 
@@ -241,11 +246,11 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
 }
 
 .message.user {
-  background: linear-gradient(135deg, var(--color-red), #a41417);
-  color: white;
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   align-self: flex-end;
   border-bottom-right-radius: 5px;
-  box-shadow: 0 2px 8px rgba(196, 23, 26, 0.3);
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
 }
 
 .chat-input-container {
@@ -276,20 +281,20 @@ CHAT INTERACTIVO DEL BOTELLÍN MEJORADO
 
 .chat-send {
   padding: 12px 18px;
-  background: linear-gradient(135deg, var(--color-gold), #DAA520);
-  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   border: none;
   border-radius: 50%;
   cursor: pointer;
   font-size: 16px;
   transition: all 0.2s ease;
-  box-shadow: 0 2px 8px rgba(244, 190, 61, 0.3);
+  box-shadow: 0 2px 8px rgba(139, 0, 0, 0.3);
 }
 
 .chat-send:hover {
-  background: linear-gradient(135deg, #DAA520, var(--color-gold));
+  background: linear-gradient(135deg, var(--color-red), var(--color-wine));
   transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(244, 190, 61, 0.5);
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.5);
 }
 
 /* =====================================
@@ -301,23 +306,24 @@ CARRITO FIJO MEJORADO CON DISEÑO PROFESIONAL
   top: 25px;
   right: 35px;
   z-index: 1001;
-  background: var(--color-red);
-  color: #fff;
-  padding: 14px 25px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
+  padding: 12px 20px;
+  border-radius: 50px;
   text-decoration: none;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: bold;
   cursor: pointer;
-  border: 3px solid var(--color-gold);
+  border: 2px solid var(--color-gold);
   animation: pulse 2.5s infinite;
   outline: 2px solid transparent;
   outline-offset: 2px;
   font-family: var(--font-primary) !important;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
 }
 
 .fixed-cart-badge:focus {
@@ -325,32 +331,32 @@ CARRITO FIJO MEJORADO CON DISEÑO PROFESIONAL
 }
 
 .fixed-cart-badge:hover {
-  background: var(--color-gold);
-  color: var(--color-red);
-  box-shadow: 0 10px 40px var(--color-gold);
-  transform: scale(1.05);
+  background: linear-gradient(135deg, var(--color-gold), #DAA520);
+  color: var(--color-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(244, 190, 61, 0.6);
 }
 
-.fixed-cart-badge .cart-icon {
+.cart-icon {
   position: relative;
   font-size: 18px;
 }
 
 .cart-count {
   position: absolute;
-  top: -8px;
-  right: -8px;
+  top: -10px;
+  right: -10px;
   background: var(--color-gold);
   color: var(--color-dark);
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: bold;
-  border: 2px solid var(--color-red);
+  border: 2px solid var(--color-wine);
   animation: cartBounce 2s infinite;
 }
 
@@ -368,10 +374,10 @@ CARRITO FIJO MEJORADO CON DISEÑO PROFESIONAL
 
 @keyframes pulse {
   0%, 100% {
-    box-shadow: 0 0 5px var(--color-gold), 0 0 10px var(--color-gold);
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.4);
   }
   50% {
-    box-shadow: 0 0 10px var(--color-gold), 0 0 20px var(--color-gold);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6);
   }
 }
 
@@ -498,10 +504,10 @@ nav a {
 }
 
 nav a:hover, nav a.active {
-  background: linear-gradient(135deg, var(--color-gold), #DAA520);
-  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(244, 190, 61, 0.4);
+  box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
   border-color: var(--color-gold);
 }
 
@@ -527,10 +533,10 @@ nav a:hover, nav a.active {
 }
 
 .dropdown-toggle:hover {
-  background: linear-gradient(135deg, var(--color-gold), #DAA520);
-  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(244, 190, 61, 0.4);
+  box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
 }
 
 .dropdown-content {
@@ -562,8 +568,8 @@ nav a:hover, nav a.active {
 }
 
 .dropdown-content a:hover {
-  background: linear-gradient(135deg, var(--color-gold), #DAA520);
-  color: var(--color-dark);
+  background: linear-gradient(135deg, var(--color-wine), var(--color-red));
+  color: var(--color-gold);
   transform: none;
   box-shadow: none;
 }
@@ -585,7 +591,21 @@ nav a:hover, nav a.active {
 }
 
 /* =====================================
-SECCIÓN MISIÓN Y VISIÓN
+MAIN CONTENT TODAS LAS SECCIONES ORIGINALES
+===================================== 
+*/
+main {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+section {
+  margin: 30px 0;
+}
+
+/* =====================================
+SECCIÓN MISIÓN Y VISIÓN CON COLORES VINO/ROJO
 ===================================== 
 */
 .mission-vision-section {
@@ -596,7 +616,7 @@ SECCIÓN MISIÓN Y VISIÓN
   border: 3px solid var(--color-gold);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(244, 190, 61, 0.2);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 25px rgba(139, 0, 0, 0.3);
 }
 
 .mission-vision-section::before {
@@ -606,7 +626,7 @@ SECCIÓN MISIÓN Y VISIÓN
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(circle, rgba(244, 190, 61, 0.05) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(139, 0, 0, 0.08) 0%, transparent 70%);
   animation: rotate 20s linear infinite;
 }
 
@@ -629,7 +649,7 @@ SECCIÓN MISIÓN Y VISIÓN
   background: rgba(13, 13, 13, 0.8);
   padding: 40px 30px;
   border-radius: 20px;
-  border: 2px solid var(--color-gold);
+  border: 2px solid var(--color-wine);
   position: relative;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
@@ -637,8 +657,8 @@ SECCIÓN MISIÓN Y VISIÓN
 
 .mission-box:hover, .vision-box:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(244, 190, 61, 0.3);
-  border-color: #DAA520;
+  box-shadow: 0 10px 30px rgba(139, 0, 0, 0.4);
+  border-color: var(--color-red);
 }
 
 .mission-box h3, .vision-box h3 {
@@ -659,7 +679,7 @@ SECCIÓN MISIÓN Y VISIÓN
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, var(--color-gold), #DAA520);
+  background: linear-gradient(90deg, var(--color-wine), var(--color-red));
   border-radius: 2px;
 }
 
@@ -673,25 +693,19 @@ SECCIÓN MISIÓN Y VISIÓN
 }
 
 /* =====================================
-CONTENIDO PRINCIPAL
+SECCIÓN HERO ORIGINAL COMPLETA
 ===================================== 
 */
-main {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .welcome-section {
   background: linear-gradient(135deg, rgba(17,17,17,0.9), rgba(13,13,13,0.95));
   padding: 80px 40px;
   text-align: center;
   border-radius: 20px;
-  margin: 40px 0;
   border: 3px solid var(--color-gold);
   position: relative;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  margin: 40px 0;
 }
 
 .welcome-section::before {
@@ -741,7 +755,266 @@ main {
 }
 
 /* =====================================
-RESPONSIVE DESIGN
+SECCIÓN DE CARACTERÍSTICAS ORIGINALES COMPLETA
+===================================== 
+*/
+.caracteristicas-section {
+  background: linear-gradient(135deg, rgba(17,17,17,0.9), rgba(13,13,13,0.95));
+  padding: 60px 30px;
+  border-radius: 20px;
+  border: 3px solid var(--color-gold);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  margin: 40px 0;
+}
+
+.caracteristicas-section h2 {
+  text-align: center;
+  font-size: 2.8em;
+  margin-bottom: 50px;
+  color: var(--color-gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: var(--font-primary) !important;
+}
+
+.caracteristicas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.caracteristica {
+  background: rgba(13, 13, 13, 0.8);
+  padding: 30px 25px;
+  border-radius: 15px;
+  border: 2px solid var(--color-wine);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.caracteristica:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(139, 0, 0, 0.4);
+  border-color: var(--color-red);
+}
+
+.caracteristica::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(139, 0, 0, 0.05) 0%, transparent 50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.caracteristica:hover::before {
+  opacity: 1;
+}
+
+.caracteristica i {
+  font-size: 3em;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.caracteristica h3 {
+  color: var(--color-gold);
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-primary) !important;
+}
+
+.caracteristica p {
+  color: #d0d0d0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+SECCIÓN DE PRODUCTOS DESTACADOS ORIGINAL COMPLETA
+===================================== 
+*/
+.productos-section {
+  background: linear-gradient(135deg, rgba(17,17,17,0.9), rgba(13,13,13,0.95));
+  padding: 60px 30px;
+  border-radius: 20px;
+  border: 3px solid var(--color-gold);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  margin: 40px 0;
+}
+
+.productos-section h2 {
+  text-align: center;
+  font-size: 2.8em;
+  margin-bottom: 50px;
+  color: var(--color-gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: var(--font-primary) !important;
+}
+
+.productos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.producto-card {
+  background: rgba(13, 13, 13, 0.8);
+  padding: 30px 25px;
+  border-radius: 15px;
+  border: 2px solid var(--color-wine);
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.producto-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(139, 0, 0, 0.4);
+  border-color: var(--color-red);
+}
+
+.producto-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(139, 0, 0, 0.05) 0%, transparent 50%);
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.producto-card:hover::before {
+  opacity: 1;
+}
+
+.producto-card i {
+  font-size: 3em;
+  color: var(--color-gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.producto-card h3 {
+  color: var(--color-gold);
+  font-size: 1.5em;
+  margin-bottom: 15px;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-primary) !important;
+}
+
+.producto-card p {
+  color: #d0d0d0;
+  line-height: 1.6;
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+SECCIÓN DE CERTIFICACIÓN LEGAL ORIGINAL
+===================================== 
+*/
+.certificacion-section {
+  background: linear-gradient(135deg, rgba(17,17,17,0.9), rgba(13,13,13,0.95));
+  padding: 60px 30px;
+  border-radius: 20px;
+  border: 3px solid var(--color-gold);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+  margin: 40px 0;
+  text-align: center;
+}
+
+.certificacion-section h2 {
+  font-size: 2.8em;
+  margin-bottom: 30px;
+  color: var(--color-gold);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+  font-family: var(--font-primary) !important;
+}
+
+.certificacion-section p {
+  font-size: 1.3em;
+  color: #d0d0d0;
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.8;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+FOOTER ORIGINAL COMPLETO
+===================================== 
+*/
+footer {
+  background: linear-gradient(135deg, var(--color-darker), #0a0a0a);
+  padding: 40px 20px;
+  text-align: center;
+  border-top: 3px solid var(--color-gold);
+  margin-top: 50px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+.footer-section h3 {
+  color: var(--color-gold);
+  margin-bottom: 15px;
+  font-size: 1.3em;
+  font-family: var(--font-primary) !important;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #d0d0d0;
+  text-decoration: none;
+  line-height: 1.6;
+  transition: color 0.3s ease;
+  font-family: var(--font-primary) !important;
+}
+
+.footer-section a:hover {
+  color: var(--color-gold);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(244, 190, 61, 0.3);
+  padding-top: 20px;
+  color: #888;
+  font-family: var(--font-primary) !important;
+}
+
+/* =====================================
+RESPONSIVE DESIGN COMPLETO
 ===================================== 
 */
 @media (max-width: 768px) {
@@ -828,6 +1101,19 @@ RESPONSIVE DESIGN
     font-size: 1.1em;
   }
   
+  .caracteristicas-grid,
+  .productos-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .caracteristicas-section,
+  .productos-section,
+  .certificacion-section {
+    margin: 20px 10px;
+    padding: 40px 20px;
+  }
+  
   .dropdown-content {
     position: fixed;
     left: 10px;
@@ -893,7 +1179,10 @@ RESPONSIVE DESIGN
     right: 15px;
   }
   
-  .mission-vision-section {
+  .mission-vision-section,
+  .caracteristicas-section,
+  .productos-section,
+  .certificacion-section {
     margin: 15px 5px;
     padding: 30px 15px;
   }
@@ -915,7 +1204,7 @@ RESPONSIVE DESIGN
 <!-- Skip Navigation -->
 <a href="#main-content" class="skip-nav">Ir al contenido principal</a>
 
-<!-- CARRITO FIJO MEJORADO -->
+<!-- CARRITO FIJO MEJORADO PROFESIONAL -->
 <a href="carrito.html" class="fixed-cart-badge" aria-label="Ver carrito de compras">
   <div class="cart-icon">
     <i class="fas fa-shopping-cart" aria-hidden="true"></i>
@@ -931,7 +1220,7 @@ RESPONSIVE DESIGN
   <p class="header-slogan">Tu socio de celebración desde Valdivia, Santa Elena</p>
 </header>
 
-<!-- NAVEGACIÓN -->
+<!-- NAVEGACIÓN ORIGINAL COMPLETA -->
 <nav aria-label="Menú principal de navegación con categorías" role="navigation">
   <a href="index.html" class="active">Inicio</a>
 
@@ -957,6 +1246,7 @@ RESPONSIVE DESIGN
 
 <!-- ASISTENTE VIRTUAL MEJORADO -->
 <div id="botellin-assistant" role="button" tabindex="0" aria-label="Chat con asistente Botellín">
+    <img src="https://placehold.co/80x80/8B0000/f4be3d?text=🍾" alt="Botellín Asistente" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
     <i class="fas fa-comments fallback-icon"></i>
 </div>
 
@@ -979,7 +1269,7 @@ RESPONSIVE DESIGN
     </div>
 </div>
 
-<!-- CONTENIDO PRINCIPAL -->
+<!-- CONTENIDO PRINCIPAL COMPLETO -->
 <main id="main-content">
     
     <!-- SECCIÓN MISIÓN Y VISIÓN -->
@@ -996,197 +1286,383 @@ RESPONSIVE DESIGN
         </div>
     </section>
 
-    <!-- SECCIÓN DE BIENVENIDA -->
+    <!-- SECCIÓN HERO ORIGINAL -->
     <section class="welcome-section">
         <div class="welcome-content">
             <h2>Bienvenido a</h2>
             <p><strong>Licorería R.B</strong>, la excelencia en bebidas y cócteles desde la comunidad de Valdivia, Santa Elena, Ecuador.</p>
             <p>Más de 5 años ofreciendo lo mejor en licores nacionales e internacionales, servicio de primera y compromiso total con la calidad y legalidad.</p>
+            <p><strong>Licorería R.B</strong> es más que una tienda, es un socio de tu celebración. Con más de 5 años en Valdivia, Santa Elena, Ecuador, somos un negocio totalmente legal y reconocido por nuestra <strong>selección curada</strong> y servicio impecable.</p>
         </div>
+    </section>
+
+    <!-- SECCIÓN DE CARACTERÍSTICAS ORIGINALES -->
+    <section class="caracteristicas-section">
+        <h2>Nuestro Compromiso de Calidad y Servicio:</h2>
+        <div class="caracteristicas-grid">
+            <div class="caracteristica">
+                <i class="fas fa-user-tie"></i>
+                <h3>Asesoría experta</h3>
+                <p>y atención personalizada.</p>
+            </div>
+            <div class="caracteristica">
+                <i class="fas fa-certificate"></i>
+                <h3>Productos 100% originales</h3>
+                <p>con garantía de origen.</p>
+            </div>
+            <div class="caracteristica">
+                <i class="fas fa-shipping-fast"></i>
+                <h3>Entrega inmediata</h3>
+                <p>y discreta en la comunidad y zonas aledañas.</p>
+            </div>
+            <div class="caracteristica">
+                <i class="fas fa-star"></i>
+                <h3>Eventos exclusivos</h3>
+                <p>y promociones especiales para clientes fieles.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE PRODUCTOS DESTACADOS ORIGINAL -->
+    <section class="productos-section">
+        <h2>La mayor variedad en licores importados y artesanales</h2>
+        <div class="productos-grid">
+            <div class="producto-card">
+                <i class="fas fa-glass-whiskey"></i>
+                <h3>Whiskys Premium</h3>
+                <p>Selecciones añejas, Single Malts raros y las mejores marcas para el verdadero conocedor.</p>
+            </div>
+            <div class="producto-card">
+                <i class="fas fa-wine-bottle"></i>
+                <h3>Aguardientes Tradicionales</h3>
+                <p>El sabor tradicional que evoca la alegría y el folclor colombiano. Un clásico indispensable.</p>
+            </div>
+            <div class="producto-card">
+                <i class="fas fa-cocktail"></i>
+                <h3>Rones Añejos</h3>
+                <p>Un tesoro añejo. Sabor suave y puro, un homenaje a la tradición con un toque de dulzura.</p>
+            </div>
+            <div class="producto-card">
+                <i class="fas fa-wine-glass"></i>
+                <h3>Colección Internacional</h3>
+                <p>Desde el single malt escocés hasta el pisco peruano, te ofrecemos una colección de licores del mundo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECCIÓN DE CERTIFICACIÓN LEGAL ORIGINAL -->
+    <section class="certificacion-section">
+        <h2>Certificación Legal</h2>
+        <p>Operamos con todas las licencias y despachamos productos que cumplen estrictamente con normas sanitarias.</p>
     </section>
 
 </main>
 
+<!-- FOOTER ORIGINAL COMPLETO -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Licorería R.B</h3>
+            <p>Tu socio de celebración desde Valdivia, Santa Elena, Ecuador</p>
+            <p>Más de 5 años de experiencia en el sector</p>
+        </div>
+        <div class="footer-section">
+            <h3>Contacto</h3>
+            <p><i class="fas fa-map-marker-alt"></i> Valdivia, Santa Elena, Ecuador</p>
+            <p><i class="fas fa-phone"></i> Contacto disponible</p>
+            <p><i class="fas fa-envelope"></i> info@licoreriafb.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Horarios</h3>
+            <p>Lunes a Domingo</p>
+            <p>Atención al cliente</p>
+            <p>Entregas programadas</p>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>&copy; 2024 Licorería R.B. Todos los derechos reservados. | Consumo responsable</p>
+    </div>
+</footer>
+
 <script>
 // =====================================
-// ASISTENTE VIRTUAL FUNCIONAL
+// SISTEMA COMPLETO DE ASISTENTE VIRTUAL
 // =====================================
+(function() {
+  'use strict';
 
-const assistant = document.getElementById('botellin-assistant');
-const chatContainer = document.getElementById('chat-container');
-const chatMessages = document.getElementById('chat-messages');
-const chatInput = document.getElementById('chat-input');
-const chatSend = document.getElementById('chat-send');
-const chatClose = document.querySelector('.chat-close');
+  let isChatOpen = false;
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    const botellin = document.getElementById('botellin-assistant');
+    const chatContainer = document.getElementById('chat-container');
+    const chatMessages = document.getElementById('chat-messages');
+    const chatInput = document.getElementById('chat-input');
+    const sendBtn = document.getElementById('chat-send');
+    const chatClose = document.querySelector('.chat-close');
 
-const botResponses = {
-    'hola': '¡Hola! Bienvenido a Licorería R.B. ¿Cómo puedo ayudarte hoy? 🍾',
-    'productos': 'Tenemos una amplia variedad: whisky premium, rones añejos, aguardientes tradicionales, cervezas, vodkas y tequilas. ¿Qué te interesa?',
-    'horarios': 'Estamos disponibles para atenderte. Puedes hacer tu pedido en cualquier momento.',
-    'delivery': 'Ofrecemos entrega inmediata y discreta en Valdivia, Santa Elena y zonas aledañas.',
-    'entrega': 'Realizamos entregas rápidas y seguras. ¿En qué zona te encuentras?',
-    'precios': 'Manejamos los mejores precios del mercado. ¿Qué producto específico te interesa?',
-    'precio': 'Nuestros precios son muy competitivos. ¿Cuál producto necesitas cotizar?',
-    'whisky': 'Tenemos whiskys premium, Single Malts escoceses y las mejores marcas internacionales.',
-    'ron': 'Nuestros rones añejos son especiales, con sabores suaves y tradicionales.',
-    'cerveza': 'Contamos con cervezas nacionales e importadas, desde las clásicas hasta artesanales.',
-    'aguardiente': 'El aguardiente tradicional colombiano que no puede faltar en tus celebraciones.',
-    'vodka': 'Vodkas premium de las mejores marcas, perfectos para cócteles.',
-    'tequila': 'Tequilas auténticos mexicanos, desde blancos hasta añejos.',
-    'contacto': 'Puedes contactarnos a través de nuestra página de contacto.',
-    'ubicacion': 'Nos encontramos en Valdivia, Santa Elena, Ecuador.',
-    'pago': 'Aceptamos varios métodos de pago. Visita nuestra página de pagos.',
-    'gracias': '¡De nada! Es un placer ayudarte. ¿Hay algo más?',
-    'adios': '¡Hasta pronto! Que tengas un excelente día. 🥃',
-    'bye': '¡Nos vemos! Gracias por elegir Licorería R.B. 🍾',
-    'legal': 'Somos un negocio 100% legal con todas las licencias requeridas.',
-    'calidad': 'Todos nuestros productos son 100% originales con garantía.',
-    'promociones': 'Tenemos promociones especiales para clientes frecuentes.',
-    'recomendacion': '¿Buscas algo especial? Puedo recomendarte según la ocasión.'
-};
+    // Respuestas del asistente virtual completas
+    const respuestas = {
+      'hola': '¡Hola! Bienvenido a Licorería R.B. ¿Cómo puedo ayudarte hoy? 🍾',
+      'hello': '¡Hello! Welcome to Licorería R.B. How can I help you today? 🍾',
+      'productos': 'Tenemos una amplia variedad: whisky premium, rones añejos, aguardientes tradicionales, cervezas, vodkas y tequilas. ¿Qué te interesa?',
+      'product': 'We have a wide variety: premium whisky, aged rums, traditional aguardientes, beers, vodkas and tequilas. What interests you?',
+      'horarios': 'Estamos disponibles para atenderte. Puedes hacer tu pedido en cualquier momento y te contactaremos.',
+      'hours': 'We are available to serve you. You can place your order at any time and we will contact you.',
+      'delivery': 'Ofrecemos entrega inmediata y discreta en Valdivia, Santa Elena y zonas aledañas.',
+      'entrega': 'Realizamos entregas rápidas y seguras. ¿En qué zona te encuentras?',
+      'precios': 'Manejamos los mejores precios del mercado. ¿Qué producto específico te interesa?',
+      'precio': 'Nuestros precios son muy competitivos. ¿Cuál producto necesitas cotizar?',
+      'prices': 'We handle the best prices in the market. What specific product are you interested in?',
+      'whisky': 'Tenemos whiskys premium, Single Malts escoceses y las mejores marcas internacionales.',
+      'whiskey': 'We have premium whiskys, Scottish Single Malts and the best international brands.',
+      'ron': 'Nuestros rones añejos son especiales, con sabores suaves y tradicionales.',
+      'rum': 'Our aged rums are special, with smooth and traditional flavors.',
+      'cerveza': 'Contamos con cervezas nacionales e importadas, desde las clásicas hasta artesanales.',
+      'beer': 'We have national and imported beers, from classics to craft beers.',
+      'aguardiente': 'El aguardiente tradicional colombiano que no puede faltar en tus celebraciones.',
+      'vodka': 'Vodkas premium de las mejores marcas, perfectos para cócteles.',
+      'tequila': 'Tequilas auténticos mexicanos, desde blancos hasta añejos.',
+      'contacto': 'Puedes contactarnos a través de nuestra página de contacto.',
+      'contact': 'You can contact us through our contact page.',
+      'ubicacion': 'Nos encontramos en Valdivia, Santa Elena, Ecuador.',
+      'location': 'We are located in Valdivia, Santa Elena, Ecuador.',
+      'pago': 'Aceptamos varios métodos de pago. Visita nuestra página de pagos.',
+      'payment': 'We accept various payment methods. Visit our payments page.',
+      'gracias': '¡De nada! Es un placer ayudarte. ¿Hay algo más en lo que pueda asistirte?',
+      'thanks': 'You\'re welcome! It\'s a pleasure to help you. Is there anything else I can assist you with?',
+      'adios': '¡Hasta pronto! Que tengas un excelente día. 🥃',
+      'goodbye': 'See you soon! Have an excellent day. 🥃',
+      'bye': '¡Nos vemos! Gracias por elegir Licorería R.B. 🍾',
+      'legal': 'Somos un negocio 100% legal con todas las licencias requeridas.',
+      'calidad': 'Todos nuestros productos son 100% originales con garantía.',
+      'quality': 'All our products are 100% original with guarantee.',
+      'promociones': 'Tenemos promociones especiales para clientes frecuentes.',
+      'promos': 'We have special promotions for frequent customers.',
+      'recomendacion': '¿Buscas algo especial? Puedo recomendarte según la ocasión.',
+      'recommend': 'Looking for something special? I can recommend according to the occasion.',
+      'mision': 'Nuestra misión es ofrecer una experiencia de compra fácil, rápida y segura con gran variedad de marcas.',
+      'vision': 'Queremos ser tu primera opción al pensar en celebrar, regalar o disfrutar un buen licor.',
+      'experiencia': 'Tenemos más de 5 años de experiencia ofreciendo los mejores licores.',
+      'experience': 'We have more than 5 years of experience offering the best liquors.',
+      'servicio': 'Nuestro servicio es de primera calidad con atención personalizada.',
+      'service': 'Our service is first class with personalized attention.'
+    };
 
-function toggleChat() {
-    if (chatContainer.style.display === 'block') {
-        chatContainer.style.display = 'none';
-    } else {
-        chatContainer.style.display = 'block';
-        chatInput.focus();
+    // Función para agregar mensaje al chat
+    function agregarMensaje(texto, esUsuario = false) {
+      const mensaje = document.createElement('div');
+      mensaje.classList.add('message');
+      mensaje.classList.add(esUsuario ? 'user' : 'bot');
+      mensaje.textContent = texto;
+      chatMessages.appendChild(mensaje);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
-}
 
-function addMessage(message, isUser = false) {
-    const messageDiv = document.createElement('div');
-    messageDiv.classList.add('message');
-    messageDiv.classList.add(isUser ? 'user' : 'bot');
-    messageDiv.textContent = message;
-    
-    chatMessages.appendChild(messageDiv);
-    chatMessages.scrollTop = chatMessages.scrollHeight;
-}
-
-function getBotResponse(userMessage) {
-    const message = userMessage.toLowerCase();
-    
-    for (let key in botResponses) {
-        if (message.includes(key)) {
-            return botResponses[key];
+    // Función para obtener respuesta del bot
+    function obtenerRespuesta(input) {
+      const mensaje = input.toLowerCase();
+      
+      // Buscar respuestas directas
+      for (let clave in respuestas) {
+        if (mensaje.includes(clave)) {
+          return respuestas[clave];
         }
-    }
-    
-    if (message.includes('recomend') || message.includes('sugier')) {
+      }
+      
+      // Respuestas contextuales avanzadas
+      if (mensaje.includes('recomend') || mensaje.includes('sugier') || mensaje.includes('recommend')) {
         return '¡Perfecto! Para recomendarte el mejor producto, ¿es para una celebración, regalo o consumo personal?';
-    }
-    
-    if (message.includes('celebra') || message.includes('fiesta')) {
-        return 'Para celebraciones te recomiendo nuestros aguardientes tradicionales o rones añejos.';
-    }
-    
-    if (message.includes('regalo')) {
-        return 'Para regalos, nuestros whiskys premium son excelentes opciones.';
-    }
-    
-    return 'Gracias por tu consulta. Para información específica, nuestro equipo estará encantado de ayudarte. 🍾';
-}
+      }
+      
+      if (mensaje.includes('celebra') || mensaje.includes('fiesta') || mensaje.includes('party')) {
+        return 'Para celebraciones te recomiendo nuestros aguardientes tradicionales o rones añejos. ¡Perfectos para brindar!';
+      }
+      
+      if (mensaje.includes('regalo') || mensaje.includes('gift')) {
+        return 'Para regalos, nuestros whiskys premium son excelentes opciones. ¿Para quién es el regalo?';
+      }
 
-function sendMessage() {
-    const message = chatInput.value.trim();
-    if (!message) return;
-    
-    addMessage(message, true);
-    chatInput.value = '';
-    
-    setTimeout(() => {
-        const botResponse = getBotResponse(message);
-        addMessage(botResponse, false);
-    }, 800);
-}
+      if (mensaje.includes('mejor') || mensaje.includes('best')) {
+        return 'Nuestros productos más populares son: whiskys Single Malt, rones añejos de 12 años y aguardientes artesanales.';
+      }
 
-assistant.addEventListener('click', toggleChat);
-assistant.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter' || e.key === ' ') {
+      if (mensaje.includes('nuevo') || mensaje.includes('new')) {
+        return 'Tenemos nuevos productos llegando constantemente. ¿Te interesa alguna categoría en particular?';
+      }
+
+      if (mensaje.includes('descuento') || mensaje.includes('oferta') || mensaje.includes('discount')) {
+        return 'Manejamos ofertas especiales para clientes frecuentes. ¡Contáctanos para conocer las promociones vigentes!';
+      }
+      
+      // Respuesta por defecto
+      return 'Gracias por tu consulta. Para información específica sobre productos y precios, nuestro equipo estará encantado de ayudarte. ¿Hay algo más en lo que pueda asistirte? 🍾';
+    }
+
+    // Función para manejar input del usuario
+    function handleUserInput() {
+      const input = chatInput.value.trim();
+      if (!input) return;
+
+      agregarMensaje(input, true);
+      chatInput.value = '';
+
+      // Simular tiempo de respuesta del bot
+      setTimeout(() => {
+        const respuesta = obtenerRespuesta(input);
+        agregarMensaje(respuesta);
+      }, 800);
+    }
+
+    // Event listeners para el chat
+    botellin.addEventListener('click', () => {
+      isChatOpen = !isChatOpen;
+      chatContainer.classList.toggle('show', isChatOpen);
+      botellin.setAttribute('aria-expanded', isChatOpen);
+      if (isChatOpen) {
+        chatInput.focus();
+      }
+    });
+
+    botellin.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        toggleChat();
-    }
-});
+        isChatOpen = !isChatOpen;
+        chatContainer.classList.toggle('show', isChatOpen);
+        botellin.setAttribute('aria-expanded', isChatOpen);
+        if (isChatOpen) {
+          chatInput.focus();
+        }
+      }
+    });
 
-chatClose.addEventListener('click', () => {
-    chatContainer.style.display = 'none';
-});
+    chatClose.addEventListener('click', () => {
+      isChatOpen = false;
+      chatContainer.classList.remove('show');
+      botellin.setAttribute('aria-expanded', false);
+    });
 
-chatSend.addEventListener('click', sendMessage);
-
-chatInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+    sendBtn.addEventListener('click', handleUserInput);
+    
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
         e.preventDefault();
-        sendMessage();
-    }
-});
-
-// =====================================
-// NAVEGACIÓN DROPDOWN
-// =====================================
-document.addEventListener('DOMContentLoaded', function() {
+        handleUserInput();
+      }
+    });
+    
+    // =====================================
+    // NAVEGACIÓN DROPDOWN COMPLETA
+    // =====================================
     const dropdown = document.querySelector('.dropdown');
     const dropdownToggle = document.querySelector('.dropdown-toggle');
     const dropdownContent = document.querySelector('.dropdown-content');
     
     if (dropdown && dropdownToggle && dropdownContent) {
-        dropdownToggle.addEventListener('click', function(e) {
-            e.preventDefault();
-            const isOpen = dropdownContent.style.display === 'block';
-            dropdownContent.style.display = isOpen ? 'none' : 'block';
-            dropdownToggle.setAttribute('aria-expanded', !isOpen);
-        });
-        
-        document.addEventListener('click', function(e) {
-            if (!dropdown.contains(e.target)) {
-                dropdownContent.style.display = 'none';
-                dropdownToggle.setAttribute('aria-expanded', 'false');
-            }
-        });
-        
-        dropdownToggle.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                const isOpen = dropdownContent.style.display === 'block';
-                dropdownContent.style.display = isOpen ? 'none' : 'block';
-                dropdownToggle.setAttribute('aria-expanded', !isOpen);
-            }
-        });
+      // Toggle dropdown con click
+      dropdownToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isOpen = dropdownContent.style.display === 'block';
+        dropdownContent.style.display = isOpen ? 'none' : 'block';
+        dropdownToggle.setAttribute('aria-expanded', !isOpen);
+      });
+      
+      // Cerrar dropdown al hacer clic fuera
+      document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+          dropdownContent.style.display = 'none';
+          dropdownToggle.setAttribute('aria-expanded', 'false');
+        }
+      });
+      
+      // Navegación con teclado
+      dropdownToggle.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          const isOpen = dropdownContent.style.display === 'block';
+          dropdownContent.style.display = isOpen ? 'none' : 'block';
+          dropdownToggle.setAttribute('aria-expanded', !isOpen);
+        }
+      });
     }
-});
-
-// =====================================
-// CONTADOR DEL CARRITO
-// =====================================
-function updateCartCount() {
-    const count = localStorage.getItem('cartCount') || 0;
-    const cartCountElement = document.getElementById('cart-count');
-    if (cartCountElement) {
+    
+    // =====================================
+    // CONTADOR DEL CARRITO FUNCIONAL
+    // =====================================
+    function updateCartCount() {
+      const count = localStorage.getItem('cartCount') || 0;
+      const cartCountElement = document.getElementById('cart-count');
+      if (cartCountElement) {
         cartCountElement.textContent = count;
+      }
     }
-}
 
-updateCartCount();
+    // Función para agregar al carrito (ejemplo)
+    function addToCart() {
+      let count = parseInt(localStorage.getItem('cartCount') || 0);
+      count++;
+      localStorage.setItem('cartCount', count);
+      updateCartCount();
+    }
 
-// =====================================
-// SCROLL SUAVE
-// =====================================
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
+    // Inicializar contador
+    updateCartCount();
+    
+    // =====================================
+    // SCROLL SUAVE PARA ENLACES INTERNOS
+    // =====================================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const target = document.querySelector(this.getAttribute('href'));
         if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
         }
+      });
     });
-});
 
-console.log('🍾 Licorería R.B - Sistema cargado correctamente');
+    // =====================================
+    // LAZY LOADING PARA IMÁGENES
+    // =====================================
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
 
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+
+    // =====================================
+    // PERFORMANCE Y ACCESIBILIDAD
+    // =====================================
+
+    // Reducir animaciones si el usuario lo prefiere
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.documentElement.style.setProperty('--animation-duration', '0.01ms');
+    }
+
+    // Log de carga exitosa
+    console.log('🍾 Licorería R.B - Todos los sistemas cargados correctamente');
+    console.log('✨ Asistente virtual: Activo');
+    console.log('🛒 Sistema de carrito: Activo');
+    console.log('📱 Diseño responsive: Optimizado');
+    console.log('🎨 Colores: Vino/Rojo/Dorado aplicados');
+  });
+})();
 </script>
 
 </body>
